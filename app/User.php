@@ -42,4 +42,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Cliente');
     }
+
+    /**
+     * Pega os avisos desse usuario
+     */
+    public function avisos()
+    {
+        return $this->hasMany('App\Aviso');
+    }
 }

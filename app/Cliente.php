@@ -19,4 +19,12 @@ class Cliente extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Pega os titulos desse usuario
+     */
+    public function titulos()
+    {
+        return $this->hasMany('App\Titulo');
+    }
 }

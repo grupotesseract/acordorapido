@@ -12,4 +12,12 @@ class Aviso extends Model
         'texto',
         'titulo',
     ];
+
+    /**
+     * Pega o usuário do aviso
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

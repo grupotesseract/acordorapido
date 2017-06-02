@@ -13,7 +13,14 @@ class CreateAvisosTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('avisos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('titulo');
+            $table->text('texto');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class CreateAvisosTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('avisos');
     }
 }

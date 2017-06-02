@@ -4,8 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pagamento extends Model
+class Titulo extends Model
 {
+    public $timestamps = true;
+
+    protected $fillable = [
+        'estado',
+    ];
 
   	/**
      * Pega o cliente desse pagamento
