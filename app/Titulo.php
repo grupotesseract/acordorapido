@@ -27,4 +27,14 @@ class Titulo extends Model
     {
         return $this->belongsTo('App\Empresa', 'empresa_id');
     }	
+
+    /**
+     * Executa as funções quando o Titulo passa pro verde
+     */
+    public function ficaVerde($obj)
+    {
+        $titulo = Titulo::find($obj->id);
+        $titulo->pago = true;
+        $titulo->save();
+    }
 }

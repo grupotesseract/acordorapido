@@ -3,49 +3,40 @@
 return [
     'graphA' => [
         // class of your domain object
-        'class' => App\User::class,
+        'class' => App\Titulo::class,
 
         // name of the graph (default is "default")
-        'graph' => 'graphA',
+        'graph' => 'cores',
 
         // property of your object holding the actual state (default is "state")
-        'property_path' => 'state',
+        'property_path' => 'estado',
 
         // list of all possible states
         'states' => [
-            'new',
-            'pending_review',
-            'awaiting_changes',
-            'accepted',
-            'published',
-            'rejected',
+            'azul',
+            'verde',
+            'amarelo',
+            'vermelho',
+            'cinza'
         ],
 
         // list of all possible transitions
         'transitions' => [
-            'create' => [
-                'from' => ['new'],
-                'to' => 'pending_review',
+            'fica_verde' => [
+                'from' => ['azul'],
+                'to' => 'verde',
             ],
-            'ask_for_changes' => [
-                'from' =>  ['pending_review', 'accepted'],
-                'to' => 'awaiting_changes',
+            'fica_amarelo' => [
+                'from' =>  ['verde'],
+                'to' => 'amarelo',
             ],
-            'cancel_changes' => [
-                'from' => ['awaiting_changes'],
-                'to' => 'pending_review',
+            'fica_vermelho' => [
+                'from' => ['amarelo'],
+                'to' => 'vermelho',
             ],
-            'submit_changes' => [
-                'from' => ['awaiting_changes'],
-                'to' =>  'pending_review',
-            ],
-            'approve' => [
-                'from' => ['pending_review', 'rejected'],
-                'to' =>  'accepted',
-            ],
-            'publish' => [
-                'from' => ['accepted'],
-                'to' =>  'published',
+            'fica_cinza' => [
+                'from' => ['azul', 'verde', 'amarelo', 'vermelho'],
+                'to' =>  'cinza',
             ],
         ],
 
@@ -53,21 +44,22 @@ return [
         'callbacks' => [
             // will be called when testing a transition
             'guard' => [
-                'guard_on_submitting' => [
-                    // call the callback on a specific transition
-                    'on' => 'submit_changes',
-                    // will call the method of this class
-                    'do' => ['MyClass', 'handle'],
-                    // arguments for the callback
-                    'args' => ['object'],
-                ],
             ],
 
             // will be called before applying a transition
             'before' => [],
 
             // will be called after applying a transition
-            'after' => [],
+            'after' => [
+                'mudou_para_verde' => [
+                    // call the callback on a specific transition
+                    'on' => 'fica_verde',
+                    // will call the method of this class
+                    'do' => ['App\Titulo', 'ficaVerde'],
+                    // arguments for the callback
+                    'args' => ['object'],
+                ],
+            ],
         ],
     ],
 ];
