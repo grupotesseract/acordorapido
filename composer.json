@@ -9,6 +9,7 @@
         "acacha/admin-lte-template-laravel": "4.*",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "prettus/l5-repository": "^2.6",
         "sebdesign/laravel-state-machine": "^1.1"
     },
     "require-dev": {
