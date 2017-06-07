@@ -12,6 +12,9 @@ use App\Http\Requests\AvisoUpdateRequest;
 use App\Repositories\AvisoRepository;
 use App\Validators\AvisoValidator;
 
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+
 
 class AvisosController extends Controller
 {
@@ -50,7 +53,8 @@ class AvisosController extends Controller
             ]);
         }
 
-        return view('avisos.index', compact('avisos'));
+        dd ($avisos);
+        //return view('avisos.index', compact('avisos'));
     }
 
     /**
@@ -194,5 +198,37 @@ class AvisosController extends Controller
         }
 
         return redirect()->back()->with('message', 'Aviso deleted.');
+    }
+
+    public function enviarAviso () 
+    {
+
+        $client = new Client(); //GuzzleHttp\Client
+        
+        $result = $client->get('http://www.zenvia360.com.br/GatewayIntegration/msgSms.do', 
+            [
+                'headers' => [
+                    'Authorization'=> 'Basic '.'YnJpdHRvOkpCM0R1T1lCbnc=',
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json'
+                ],
+                'sendSmsRequest' => [
+                    'from' => 'Aviso Rápido',
+                    'to' => '5514981225509',
+                    'msg' => 'teste zenvia',
+                    'callbackOption' => 'NONE',
+                    'id' => '2'
+                ]
+            ]
+        );
+        
+        $result->getStatusCode();
+        $response = $result->getBody();
+
+        dd($result);
+
+
+    
+
     }
 }
