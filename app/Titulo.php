@@ -34,7 +34,12 @@ class Titulo extends Model
     public function ficaVerde($obj)
     {
         $titulo = Titulo::find($obj->id);
-        $titulo->pago = true;
+        $titulo->estado = "verde";
         $titulo->save();
+
+        $user = $titulo->cliente->user;
+        // Envia o SMS
+        // @todo
+
     }
 }
