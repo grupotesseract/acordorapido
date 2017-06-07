@@ -27,11 +27,7 @@ class Cliente extends Model
     {
         return $this->hasMany('App\Titulo');
     }
-
-    public function empresa()
-    {
-        return $this->belongsTo('App\Empresa');
-    }
+    
 
 
 }

@@ -50,7 +50,7 @@ class EsqueletoSeeder extends Seeder
 
 
         } catch (\Illuminate\Database\QueryException $exception) {
-
+                echo 'erro';
         }
     }
 }

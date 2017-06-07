@@ -19,6 +19,16 @@ class CreateClientesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+            $table->string('turma');
+            $table->string('periodo');
+            $table->string('responsavel');
+            $table->string('celular');
+            $table->string('telefone');
+            $table->string('telefone2')->nullable();
+            $table->string('celular2')->nullable();
+            $table->string('titulo');
+            $table->decimal('valor',18,2);
+            $table->date('vencimento'); 
         });
     }
 
