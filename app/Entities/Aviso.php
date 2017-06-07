@@ -1,15 +1,31 @@
 <?php
 
-namespace App\Entities;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 
-class Aviso extends Model implements Transformable
+class Aviso extends Model
 {
-    use TransformableTrait;
+	public $timestamps = true;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'texto',
+        'titulo',
+    ];
 
+    /**
+     * Pega o usuário do aviso
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Pega o cliente do aviso
+     */
+    public function cliente()
+    {
+        return $this->belongsTo('App\Cliente');
+    }
 }

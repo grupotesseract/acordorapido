@@ -27,6 +27,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\AvisoRepository::class, \App\Repositories\AvisoRepositoryEloquent::class);
 
         $this->app->bind(\App\Repositories\AvisosRepository::class, \App\Repositories\AvisosRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\AvisosRepository::class, \App\Repositories\AvisosRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\AvisosRepository::class, \App\Repositories\AvisosRepositoryEloquent::class);
         //:end-bindings:
     }
 }

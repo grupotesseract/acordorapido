@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Empresa extends Model
+class Cliente extends Model
 {
 	public $timestamps = true;
 
@@ -13,7 +13,7 @@ class Empresa extends Model
     ];
 
     /**
-     * Pega o usuário da empresa
+     * Pega o usuário desse cliente
      */
     public function user()
     {
@@ -27,4 +27,11 @@ class Empresa extends Model
     {
         return $this->hasMany('App\Titulo');
     }
+
+    public function empresa()
+    {
+        return $this->belongsTo('App\Empresa');
+    }
+
+
 }
