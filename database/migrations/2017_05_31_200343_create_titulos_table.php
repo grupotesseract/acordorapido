@@ -21,6 +21,8 @@ class CreateTitulosTable extends Migration
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->integer('empresa_id')->unsigned();
             $table->foreign('empresa_id')->references('id')->on('empresas');
+            $table->boolean('pago')->default(false);
+            $table->date('vencimento')->nullable();
             $table->timestamps();
         });
     }

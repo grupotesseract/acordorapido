@@ -17,9 +17,9 @@ class EsqueletoSeeder extends Seeder
         try {
             
             $u = new App\User();
-            $u->nome = "Evandro Carreira";
+            $u->name = "Evandro Carreira";
             $u->email = "evandro.carreira@gmail.com";
-            $u->senha = bcrypt(env('ADMIN_PWD', '123321'));
+            $u->password = bcrypt(env('ADMIN_PWD', '123321'));
             $u->save();
 
             $e = new App\Empresa();
