@@ -12,6 +12,8 @@ use App\Http\Requests\TituloUpdateRequest;
 use App\Repositories\TituloRepository;
 use App\Validators\TituloValidator;
 
+use App\Empresa as Empresa;
+
 
 class TitulosController extends Controller
 {
@@ -194,5 +196,19 @@ class TitulosController extends Controller
         }
 
         return redirect()->back()->with('message', 'Titulo deleted.');
+    }
+
+    public function importa($estado)
+    {
+        Excel::load('public/sample_titulos.xlsx', function($reader) {
+
+            $reader->each(function($sheet) {
+                $empresa = Empresa::ofType($sheet->escola)->get();
+                dd ($empresa);
+            });
+
+
+        });
+
     }
 }

@@ -35,5 +35,16 @@ class Empresa extends Model
     {
         return $this->hasMany('App\Cliente');
     }
+
+    
+    /**
+      * Checagem inicial da importação da existência da escola!
+      Futuramente, isso inserirá automaticamente uma escola
+      */ 
+
+    public function scopeOfNome($query, $nome)
+    {
+        return $query->where('nome', $nome);
+    }
 }
 }
