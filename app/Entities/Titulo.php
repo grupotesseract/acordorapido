@@ -1,15 +1,30 @@
 <?php
 
-namespace App\Entities;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Prettus\Repository\Contracts\Transformable;
-use Prettus\Repository\Traits\TransformableTrait;
 
-class Titulo extends Model implements Transformable
+class Titulo extends Model
 {
-    use TransformableTrait;
+    public $timestamps = true;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'estado',
+    ];
 
+  	/**
+     * Pega o cliente desse pagamento
+     */
+    public function cliente()
+    {
+        return $this->belongsTo('App\Cliente', 'cliente_id');
+    }	
+
+  	/**
+     * Pega a empresa que gerou o pagamento
+     */
+    public function empresa()
+    {
+        return $this->belongsTo('App\Empresa', 'empresa_id');
+    }	
 }

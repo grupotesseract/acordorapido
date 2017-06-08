@@ -178,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Sebdesign\SM\ServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
-        Prettus\Repository\Providers\RepositoryServiceProvider::class
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        
 
     ],
 

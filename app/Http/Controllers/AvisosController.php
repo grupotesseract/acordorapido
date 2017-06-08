@@ -13,6 +13,8 @@ use App\Repositories\AvisoRepository;
 use App\Validators\AvisoValidator;
 
 
+
+
 class AvisosController extends Controller
 {
 
@@ -28,6 +30,7 @@ class AvisosController extends Controller
 
     public function __construct(AvisoRepository $repository, AvisoValidator $validator)
     {
+        $this->middleware('auth');
         $this->repository = $repository;
         $this->validator  = $validator;
     }
@@ -50,7 +53,8 @@ class AvisosController extends Controller
             ]);
         }
 
-        return view('avisos.index', compact('avisos'));
+        dd ($avisos);
+        //return view('avisos.index', compact('avisos'));
     }
 
     /**
@@ -194,5 +198,11 @@ class AvisosController extends Controller
         }
 
         return redirect()->back()->with('message', 'Aviso deleted.');
+    }
+
+    public function enviarAviso () 
+    {   
+        $this->repository->enviarAviso();   
+
     }
 }
