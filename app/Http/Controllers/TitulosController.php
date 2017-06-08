@@ -13,7 +13,9 @@ use App\Repositories\TituloRepository;
 use App\Validators\TituloValidator;
 
 use App\Empresa as Empresa;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Collections\RowCollection;
+use Maatwebsite\Excel\Collections\SheetCollection;
 
 class TitulosController extends Controller
 {
