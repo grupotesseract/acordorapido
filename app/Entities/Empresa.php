@@ -46,5 +46,5 @@ class Empresa extends Model
     {
         return $query->where('nome', $nome);
     }
-}
+
 }

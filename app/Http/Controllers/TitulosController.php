@@ -200,13 +200,15 @@ class TitulosController extends Controller
         return redirect()->back()->with('message', 'Titulo deleted.');
     }
 
-    public function importa($estado)
+    public function importa(TituloCreateRequest $request, $estado)
     {
         Excel::load('public/sample_titulos.xlsx', function($reader) {
 
             $reader->each(function($sheet) {
-                $empresa = Empresa::ofType($sheet->escola)->get();
-                dd ($empresa);
+                $empresa = Empresa::ofNome($sheet->escola)->get()->first();
+                if (is_null($empresa)) {
+                    echo "vazio";
+                }
             });
 
 
