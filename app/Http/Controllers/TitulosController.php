@@ -12,6 +12,10 @@ use App\Http\Requests\TituloUpdateRequest;
 use App\Repositories\TituloRepository;
 use App\Validators\TituloValidator;
 
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Collections\RowCollection;
+use Maatwebsite\Excel\Collections\SheetCollection;
+
 
 class TitulosController extends Controller
 {
@@ -194,5 +198,10 @@ class TitulosController extends Controller
         }
 
         return redirect()->back()->with('message', 'Titulo deleted.');
+    }
+
+    public function importa($estado)
+    {
+
     }
 }
