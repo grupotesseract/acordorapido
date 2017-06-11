@@ -27,4 +27,6 @@ class Titulo extends Model
     {
         return $this->belongsTo('App\Empresa', 'empresa_id');
     }	
+
+    
 }

@@ -37,13 +37,6 @@ class Empresa extends Model
     }
 
     
-    /**
-      * Checagem inicial da importação da existência da escola!
-      */ 
-
-    public function scopeOfNome($query, $nome)
-    {
-        return $query->where('nome', $nome);
-    }
+    
 
 }

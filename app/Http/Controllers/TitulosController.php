@@ -14,6 +14,8 @@ use App\Validators\TituloValidator;
 
 use App\Empresa as Empresa;
 use App\Cliente as Cliente;
+use App\Titulo as Titulo;
+
 
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Collections\RowCollection;
@@ -204,44 +206,51 @@ class TitulosController extends Controller
         return redirect()->back()->with('message', 'Titulo deleted.');
     }
 
-    public function importa(TituloCreateRequest $request, $estado)
+    public function importacao($estado) {
+        return view('vendor.adminlte.importacao')->with(['estado'=> $estado]);
+    }
+
+
+
+    public function importa(TituloCreateRequest $request, string $estado)
     {
-        Excel::load('public/sample_titulos.xlsx', function($reader) {
+        Excel::load('public/sample_titulos.xlsx', function($reader) use ($estado) {
 
-            $reader->each(function($sheet) {
-                $empresa = Empresa::ofNome($sheet->escola)->get()->first();
-                if (is_null($empresa)) {
-                    $empresa = new Empresa;
-                    $empresa->nome = $sheet->escola;
-                    $empresa->user_id = Auth::id();
-                    $empresa->cidade = $sheet->cidade;
-                    $empresa->estado = $sheet->estado;
-                    $empresa->save();
-                    $empresa_id = $empresa->id;
-                }
-                else
-                    $empresa_id = $empresa->id;
+            $reader->each(function($sheet) use ($estado) {
 
-                $cliente = Cliente::OfRGeEmpresa($sheet->rg)->get()->first();
+                $empresa = Empresa::firstOrNew(['nome' => $sheet->escola]);
+                $empresa->nome = $sheet->escola;
+                $empresa->user_id = Auth::id();
+                $empresa->cidade = $sheet->cidade;
+                $empresa->estado = $sheet->estado;
+                $empresa->save();
+                $empresa_id = $empresa->id;
+                
 
-                if (is_null($cliente)) {
-                    $cliente = new Cliente;
-                    $cliente->nome = $sheet->nome;
-                    $cliente->user_id = Auth::id();
-                    $cliente->turma = $sheet->turma;
-                    $cliente->periodo = $sheet->periodo;
-                    $cliente->responsavel = $sheet->responsavel;
-                    $cliente->celular = $sheet->celular;
-                    $cliente->telefone = $sheet->telefone;
-                    $cliente->telefone2 = $sheet->telefone2;
-                    $cliente->celular2 = $sheet->celular2;
-                    $cliente->rg = $sheet->rg;
-                    $cliente->save();
-                    $cliente_id = $cliente->id;
-                }
-                else
-                    $cliente_id = $cliente->id;
+                $cliente = Cliente::firstOrNew(['rg' => $sheet->rg]);
+                $cliente->nome = $sheet->nome;
+                $cliente->user_id = Auth::id();
+                $cliente->turma = $sheet->turma;
+                $cliente->periodo = $sheet->periodo;
+                $cliente->responsavel = $sheet->responsavel;
+                $cliente->celular = $sheet->celular;
+                $cliente->telefone = $sheet->telefone;
+                $cliente->telefone2 = $sheet->telefone2;
+                $cliente->celular2 = $sheet->celular2;
+                $cliente->rg = $sheet->rg;
+                $cliente->save();
+                $cliente_id = $cliente->id;
+                
 
+                $titulo = Titulo::firstOrNew(['titulo' => $sheet->titulo]);
+                $titulo->estado = $estado;
+                $titulo->cliente_id = $cliente_id;
+                $titulo->empresa_id = $empresa_id;
+                $titulo->pago = false;
+                $titulo->vencimento = $sheet->vencimento;
+                $titulo->valor = $sheet->valor;
+                $titulo->titulo = $sheet->titulo;
+                $titulo->save();
 
             });
 

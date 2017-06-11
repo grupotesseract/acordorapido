@@ -28,10 +28,11 @@ Route::resource('avisos', AvisosController::class);
 
 Route::resource('titulos', TitulosController::class);
 
-Route::get('importa/{state}', 'TitulosController@importa');
+Route::get('importacao/{state}', 'TitulosController@importacao');
+
 Route::resource('titulos', TitulosController::class);
 
-Route::post('importa/{state}', 'TitulosController@importa');
+Route::get('importa/{state}', 'TitulosController@importa');
 
 
 Route::get('sms', 'AvisosController@enviarAviso');
