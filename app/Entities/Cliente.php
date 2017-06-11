@@ -27,6 +27,15 @@ class Cliente extends Model
     {
         return $this->hasMany('App\Titulo');
     }
+
+    /**
+      * Checagem inicial do RG do Aluno
+      */ 
+
+    public function scopeOfRGeEmpresa($query, $rg)
+    {
+        return $query->where('rg', $rg);
+    }
     
 
 

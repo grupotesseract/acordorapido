@@ -39,7 +39,6 @@ class Empresa extends Model
     
     /**
       * Checagem inicial da importação da existência da escola!
-      Futuramente, isso inserirá automaticamente uma escola
       */ 
 
     public function scopeOfNome($query, $nome)

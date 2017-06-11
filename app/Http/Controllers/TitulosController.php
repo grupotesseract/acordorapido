@@ -13,9 +13,13 @@ use App\Repositories\TituloRepository;
 use App\Validators\TituloValidator;
 
 use App\Empresa as Empresa;
+use App\Cliente as Cliente;
+
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Collections\RowCollection;
 use Maatwebsite\Excel\Collections\SheetCollection;
+
+use Auth;
 
 class TitulosController extends Controller
 {
@@ -207,8 +211,38 @@ class TitulosController extends Controller
             $reader->each(function($sheet) {
                 $empresa = Empresa::ofNome($sheet->escola)->get()->first();
                 if (is_null($empresa)) {
-                    echo "vazio";
+                    $empresa = new Empresa;
+                    $empresa->nome = $sheet->escola;
+                    $empresa->user_id = Auth::id();
+                    $empresa->cidade = $sheet->cidade;
+                    $empresa->estado = $sheet->estado;
+                    $empresa->save();
+                    $empresa_id = $empresa->id;
                 }
+                else
+                    $empresa_id = $empresa->id;
+
+                $cliente = Cliente::OfRGeEmpresa($sheet->rg)->get()->first();
+
+                if (is_null($cliente)) {
+                    $cliente = new Cliente;
+                    $cliente->nome = $sheet->nome;
+                    $cliente->user_id = Auth::id();
+                    $cliente->turma = $sheet->turma;
+                    $cliente->periodo = $sheet->periodo;
+                    $cliente->responsavel = $sheet->responsavel;
+                    $cliente->celular = $sheet->celular;
+                    $cliente->telefone = $sheet->telefone;
+                    $cliente->telefone2 = $sheet->telefone2;
+                    $cliente->celular2 = $sheet->celular2;
+                    $cliente->rg = $sheet->rg;
+                    $cliente->save();
+                    $cliente_id = $cliente->id;
+                }
+                else
+                    $cliente_id = $cliente->id;
+
+
             });
 
 

@@ -26,6 +26,8 @@ class CreateClientesTable extends Migration
             $table->string('telefone');
             $table->string('telefone2')->nullable();
             $table->string('celular2')->nullable();
+            $table->string('rg');
+
         });
     }
 
