@@ -214,7 +214,7 @@ class TitulosController extends Controller
 
     public function importa(TituloCreateRequest $request, string $estado)
     {
-        Excel::load('public/sample_titulos.xlsx', function($reader) use ($estado) {
+        Excel::load($request->file('excel'), function($reader) use ($estado) {
 
             $reader->each(function($sheet) use ($estado) {
 

@@ -15,7 +15,7 @@
         <h4>Escolha abaixo a planilha a ser importada</h4>
       </div>
       <div class="col-xs-12">
-        {!! Form::open(array('url'=>'importacao/upload','method'=>'POST', 'files'=>true)) !!}
+        {!! Form::open(array('url'=>'importa/'.$estado,'method'=>'POST', 'files'=>true)) !!}
           <div class="control-group">
             <div class="controls">
               {!! Form::file('excel', ['required', 'class' => 'form-file']) !!}
