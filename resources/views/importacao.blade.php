@@ -2,7 +2,7 @@
 
 @section('htmlheader_title', 'Importação XLS')
 
-@section('contentheader_title', 'Importar Planilha Captura das Vendas')
+@section('contentheader_title', 'Importar Planilha - Módulo '.ucfirst($estado))
 
 @section('main-content')
   <div class="container">

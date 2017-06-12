@@ -207,7 +207,7 @@ class TitulosController extends Controller
     }
 
     public function importacao($estado) {
-        return view('vendor.adminlte.importacao')->with(['estado'=> $estado]);
+        return view('importacao')->with(['estado'=> $estado]);
     }
 
 

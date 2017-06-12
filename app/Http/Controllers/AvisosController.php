@@ -53,8 +53,7 @@ class AvisosController extends Controller
             ]);
         }
 
-        dd ($avisos);
-        //return view('avisos.index', compact('avisos'));
+        return view('avisos.index', compact('avisos'));
     }
 
     /**
@@ -131,6 +130,11 @@ class AvisosController extends Controller
 
         $aviso = $this->repository->find($id);
 
+        return view('avisos.edit', compact('aviso'));
+    }
+
+    public function create()
+    {
         return view('avisos.edit', compact('aviso'));
     }
 

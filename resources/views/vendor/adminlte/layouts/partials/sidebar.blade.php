@@ -24,7 +24,15 @@
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li><a href="#"><i class='glyphicon glyphicon-comment'></i> <span>Enviar SMS</span></a></li>
+            
+            <li class="treeview">
+                <a href="#"><i class='glyphicon glyphicon-comment'></i> <span>Avisos</span><i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{url('avisos')}}">Listar Avisos Enviados</a></li>
+                    <li><a href="{{url('avisos/create')}}">Enviar Avisos</a></li>
+                </ul>
+            </li>
+
             <li><a href="#"><i class='glyphicon glyphicon-stats'></i> <span>Relatórios</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='glyphicon glyphicon-import'></i> <span>Importações</span> <i class="fa fa-angle-left pull-right"></i></a>
