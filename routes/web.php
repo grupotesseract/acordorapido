@@ -25,4 +25,14 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::resource('avisos', AvisosController::class);
+
+Route::resource('titulos', TitulosController::class);
+
+Route::get('importacao/{estado}', 'TitulosController@importacao');
+
+Route::resource('titulos', TitulosController::class);
+
+Route::post('importa/{estado}', 'TitulosController@importa');
+
+
 Route::get('sms', 'AvisosController@enviarAviso');

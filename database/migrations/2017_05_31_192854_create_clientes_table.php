@@ -26,9 +26,8 @@ class CreateClientesTable extends Migration
             $table->string('telefone');
             $table->string('telefone2')->nullable();
             $table->string('celular2')->nullable();
-            $table->string('titulo');
-            $table->decimal('valor',18,2);
-            $table->date('vencimento'); 
+            $table->string('rg');
+
         });
     }
 

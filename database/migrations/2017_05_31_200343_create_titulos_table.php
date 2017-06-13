@@ -23,6 +23,9 @@ class CreateTitulosTable extends Migration
             $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->boolean('pago')->default(false);
             $table->date('vencimento')->nullable();
+            $table->decimal('valor',18,2);
+            $table->string('titulo');
+            
             $table->timestamps();
         });
     }

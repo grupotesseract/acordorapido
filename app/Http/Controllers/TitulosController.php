@@ -12,6 +12,16 @@ use App\Http\Requests\TituloUpdateRequest;
 use App\Repositories\TituloRepository;
 use App\Validators\TituloValidator;
 
+use App\Empresa as Empresa;
+use App\Cliente as Cliente;
+use App\Titulo as Titulo;
+
+
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Collections\RowCollection;
+use Maatwebsite\Excel\Collections\SheetCollection;
+
+use Auth;
 
 class TitulosController extends Controller
 {
@@ -194,5 +204,58 @@ class TitulosController extends Controller
         }
 
         return redirect()->back()->with('message', 'Titulo deleted.');
+    }
+
+    public function importacao($estado) {
+        return view('vendor.adminlte.importacao')->with(['estado'=> $estado]);
+    }
+
+
+
+    public function importa(TituloCreateRequest $request, string $estado)
+    {
+        Excel::load($request->file('excel'), function($reader) use ($estado) {
+
+            $reader->each(function($sheet) use ($estado) {
+
+                $empresa = Empresa::firstOrNew(['nome' => $sheet->escola]);
+                $empresa->nome = $sheet->escola;
+                $empresa->user_id = Auth::id();
+                $empresa->cidade = $sheet->cidade;
+                $empresa->estado = $sheet->estado;
+                $empresa->save();
+                $empresa_id = $empresa->id;
+                
+
+                $cliente = Cliente::firstOrNew(['rg' => $sheet->rg]);
+                $cliente->nome = $sheet->nome;
+                $cliente->user_id = Auth::id();
+                $cliente->turma = $sheet->turma;
+                $cliente->periodo = $sheet->periodo;
+                $cliente->responsavel = $sheet->responsavel;
+                $cliente->celular = $sheet->celular;
+                $cliente->telefone = $sheet->telefone;
+                $cliente->telefone2 = $sheet->telefone2;
+                $cliente->celular2 = $sheet->celular2;
+                $cliente->rg = $sheet->rg;
+                $cliente->save();
+                $cliente_id = $cliente->id;
+                
+
+                $titulo = Titulo::firstOrNew(['titulo' => $sheet->titulo]);
+                $titulo->estado = $estado;
+                $titulo->cliente_id = $cliente_id;
+                $titulo->empresa_id = $empresa_id;
+                $titulo->pago = false;
+                $titulo->vencimento = $sheet->vencimento;
+                $titulo->valor = $sheet->valor;
+                $titulo->titulo = $sheet->titulo;
+                $titulo->save();
+
+            });
+
+
+        });
+
     }
 }
