@@ -15,6 +15,8 @@ use App\Validators\TituloValidator;
 use App\Empresa as Empresa;
 use App\Cliente as Cliente;
 use App\Titulo as Titulo;
+use Redirect;
+
 
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -242,6 +244,7 @@ class TitulosController extends Controller
                 $cliente_id = $cliente->id;
                 
 
+                //IMPLEMENTAR FIRSTORNEW NO REPOSITÓRIO PRA FICAR BUNITIN
                 $titulo = Titulo::firstOrNew(['titulo' => $sheet->titulo]);
                 $titulo->estado = $estado;
                 $titulo->cliente_id = $cliente_id;
@@ -252,10 +255,20 @@ class TitulosController extends Controller
                 $titulo->titulo = $sheet->titulo;
                 $titulo->save();
 
-            });
-
+                
+            });           
 
         });
 
+        
+
+        \Session::flash('flash_message_success', true);
+        \Session::flash('flash_message',  'Títulos importados com sucesso!');
+
+        
+        return Redirect::to('/importacao/'.$estado);
+
+
+        
     }
 }

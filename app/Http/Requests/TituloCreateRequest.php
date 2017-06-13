@@ -23,8 +23,9 @@ class TituloCreateRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            //
+            'excel' => 'mimes:xlsx,xls'
         ];
     }
 }
