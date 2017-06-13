@@ -204,6 +204,7 @@ class AvisosController extends Controller
         return redirect()->back()->with('message', 'Aviso deleted.');
     }
 
+    
     public function enviarAviso () 
     {   
         $this->repository->enviarAviso();   
