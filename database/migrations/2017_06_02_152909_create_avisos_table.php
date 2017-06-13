@@ -19,14 +19,13 @@ class CreateAvisosTable extends Migration
             $table->text('texto');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->decimal('valor',18,2);
             
             $table->timestamps();
 
             $table->integer('cliente_id')->unsigned()->nullable();
             $table->foreign('cliente_id')->references('id')->on('clientes');
 
-            $table->integer('status');
+            $table->integer('status')->default(0);
         });
     }
 

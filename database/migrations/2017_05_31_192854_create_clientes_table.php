@@ -19,11 +19,11 @@ class CreateClientesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
-            $table->string('turma');
-            $table->string('periodo');
-            $table->string('responsavel');
-            $table->string('celular');
-            $table->string('telefone');
+            $table->string('turma')->nullable();
+            $table->string('periodo')->nullable();
+            $table->string('responsavel')->nullable();
+            $table->string('celular')->nullable();
+            $table->string('telefone')->nullable();
             $table->string('telefone2')->nullable();
             $table->string('celular2')->nullable();
             $table->string('rg');

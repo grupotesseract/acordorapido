@@ -34,5 +34,4 @@ Route::resource('titulos', TitulosController::class);
 
 Route::post('importa/{estado}', 'TitulosController@importa');
 
-
 Route::get('sms', 'AvisosController@enviarAviso');

@@ -24,12 +24,14 @@ class EsqueletoSeeder extends Seeder
 
             $e = new App\Empresa();
             $e->nome = "UNIP";
+            $e->cidade = "Bauru";
+            $e->estado = "SP";
             $e->save();
 
             $c = new App\Cliente();
             $c->nome = "Evandro Barbosa Carreira";
+            $c->rg = "46.755.061-2";
             $c->user()->associate($u);
-            $c->empresa()->associate($e);
 
             $c->save();
 
@@ -37,6 +39,8 @@ class EsqueletoSeeder extends Seeder
 
             $t = new App\Titulo();
             $t->estado = "azul";
+            $t->valor = 1380.45;
+            $t->titulo = "0834A34B8332459E00000021238002017";
             $t->cliente()->associate($c);
             $t->empresa()->associate($e);
             $t->save();
@@ -50,6 +54,7 @@ class EsqueletoSeeder extends Seeder
 
 
         } catch (\Illuminate\Database\QueryException $exception) {
+            dd($exception);
                 echo 'erro';
         }
     }
