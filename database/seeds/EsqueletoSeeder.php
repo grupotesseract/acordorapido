@@ -38,9 +38,10 @@ class EsqueletoSeeder extends Seeder
             
 
             $t = new App\Titulo();
-            $t->estado = "azul";
+            $t->estado = "verde";
             $t->valor = 1380.45;
-            $t->titulo = "0834A34B8332459E00000021238002017";
+            $t->titulo = "0834A34002017";
+            $t->pago = true;
             $t->cliente()->associate($c);
             $t->empresa()->associate($e);
             $t->save();
