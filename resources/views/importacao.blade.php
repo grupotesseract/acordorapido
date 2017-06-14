@@ -27,11 +27,12 @@
                 </div>
               @endif
 
-              {!! Form::file('excel', ['required', 'class' => 'form-file']) !!}
               <p class="errors">
-              {!!$errors->first('excel')!!}
+                {!!$errors->first('excel')!!}
               </p>
-              
+
+              {!! Form::file('excel', ['required', 'class' => 'form-file']) !!}
+                            
             </div>
           </div>
           <div class="col-xs-12 margin-t-1 text-right">
