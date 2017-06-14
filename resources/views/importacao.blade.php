@@ -18,10 +18,21 @@
         {!! Form::open(array('url'=>'importa/'.$estado,'method'=>'POST', 'files'=>true)) !!}
           <div class="control-group">
             <div class="controls">
-              {!! Form::file('excel', ['required', 'class' => 'form-file']) !!}
+              
+              @if(Session::has('flash_message_success'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Sucesso!</h4>
+                    <em>{!! session('flash_message') !!}</em>
+                </div>
+              @endif
+
               <p class="errors">
-              {!!$errors->first('excel')!!}
+                {!!$errors->first('excel')!!}
               </p>
+
+              {!! Form::file('excel', ['required', 'class' => 'form-file']) !!}
+                            
             </div>
           </div>
           <div class="col-xs-12 margin-t-1 text-right">
