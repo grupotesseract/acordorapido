@@ -42,27 +42,29 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
     public function enviarAviso (AvisoCreateRequest $request) 
     {
 
-        $client = new Client(); //GuzzleHttp\Client
+        $client = new Client(['base_uri' => 'https://api-rest.zenvia360.com.br/services/']); //GuzzleHttp\Client
         
-        $result = $client->get('http://www.zenvia360.com.br/GatewayIntegration/msgSms.do', 
+        $result = $client->request('POST','send-sms', 
+            
             [
-                "headers" => [
-                    "Authorization"=> "Basic '.'YnJpdHRvOkpCM0R1T1lCbnc=",
-                    "Content-Type" => "application/json",
-                    "Accept" => "application/json"
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Basic YnJpdHRvOkpCM0R1T1lCbnc=',
+                    'Accept' => 'application/json',
                 ],
-                //"body" => [
-                    "sendSmsRequest" => [                        
-                        "from" => "Aviso Rápido",
-                        "to" => $request['to'],
-                        "msg" => $request['msg'],
-                        "callbackOption" => "NONE",
-                        "id" => "2"
-                    ]
-                //]
+                'json' => ['sendSmsRequest' => [                        
+                    'from' => 'teste',
+                    'to' => '5514981225509',
+                    'msg' => 'teste de envio ona',
+                    'callbackOption' => 'NONE',
+                    'id' => '2',
+                    'aggregateId' => '1111'
+                ]
+                ]
             ]
-        );
-        
+        );       
+
+                
         $result->getStatusCode();
         $response = $result->getBody();
 
