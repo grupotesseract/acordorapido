@@ -23,7 +23,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <meta name="twitter:site" content="@acachawiki" />
     <meta name="twitter:creator" content="@acacha1" />
 
-    <title>Aviso Rápido</title>
+    <title>Acordo Rápido</title>
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('/css/all-landing.css') }}" rel="stylesheet">
@@ -45,7 +45,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><b>Aviso Rápido</b></a>
+                <a class="navbar-brand" href="#"><b>Acordo Rápido</b></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -72,7 +72,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
             <div class="container">
                 <div class="row centered">
                     <div class="col-lg-12">
-                        <h1>Aviso <b>Rápido</b></h1>
+                        <h1>Acordo <b>Rápido</b></h1>
                         <h3>É um novo serviço de comunicação de mensagens escritas para levar a informação que você quer passar de modo direcionado e eficiente.</h3>
                         <h3><a href="{{ url('/register') }}" class="btn btn-lg btn-success">Conheça mais!</a></h3>
                     </div>
@@ -101,7 +101,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
         <div id="features">
             <div class="container">
                 <div class="row">
-                    <h1 class="centered">O que é o aviso rápido?</h1>
+                    <h1 class="centered">O que é o acordo rápido?</h1>
                     <br>
                     <br>
                     <div class="col-lg-6 centered">
@@ -213,7 +213,7 @@ Landing page based on Pratt: http://blacktie.co/demo/pratt/
     <footer>
         <div id="c">
             <div class="container">
-                <p>Aviso Rápido ®
+                <p>Acordo Rápido ®
                 </p>
 
             </div>

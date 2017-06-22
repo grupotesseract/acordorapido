@@ -29,7 +29,7 @@
 					<span class="col-sm-12" title="{{ $titulo->pago ? 'Pagamento efetuado' : 'Pagamento pendente' }}">  @if($titulo->pago)<span class="glyphicon glyphicon-check" aria-hidden="true"></span> @else <span class="glyphicon glyphicon-unchecked" aria-hidden="true"></span> @endif R${{ $titulo->valor }}</span>	
 					<span class="col-sm-12"><b>Vencimento:</b> {{ $titulo->vencimento }}</span>	
 					<span class="col-sm-12 estado-{{ $titulo->estado }}"></span>
-					<button class="btn btn-default"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Enviar SMS</button>
+					<a href="/avisos/create" class="btn btn-default"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Enviar SMS</a>
 				</div>
 				</div>
 				@endforeach

@@ -35,8 +35,6 @@ class EsqueletoSeeder extends Seeder
 
             $c->save();
 
-            
-
             $t = new App\Titulo();
             $t->estado = "verde";
             $t->valor = 1380.45;
@@ -52,8 +50,7 @@ class EsqueletoSeeder extends Seeder
             $a->user()->associate($u);
             $a->cliente()->associate($c);
             $a->save();
-
-
+            
         } catch (\Illuminate\Database\QueryException $exception) {
             dd($exception);
                 echo 'erro';
