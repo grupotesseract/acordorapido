@@ -207,6 +207,10 @@ class AvisosController extends Controller
     
     public function enviarAviso (AvisoCreateRequest $request) 
     {   
-        $this->repository->enviarAviso($request);   
+        $this->repository->enviarAviso($request);  
+
+        //TRATAR RETORNO
+        return redirect()->back()->with('message', 'SMS enviado com sucesso!');
+
     }
 }

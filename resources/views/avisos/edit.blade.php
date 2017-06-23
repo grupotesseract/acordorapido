@@ -19,11 +19,11 @@
           <div class="control-group">
             <div class="controls">
               
-              @if(Session::has('flash_message_success'))
+              @if(session('message'))
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4><i class="icon fa fa-check"></i> Sucesso!</h4>
-                    <em>{!! session('flash_message') !!}</em>
+                    <em>{!! session('message') !!}</em>
                 </div>
               @endif
 
@@ -31,25 +31,15 @@
                 {!!$errors->first('excel')!!}
               </p>
 
-              <div class="col-xs-12">              
-                <div class="row">              
-                  {!! Form::label('to', 'Número do destinatário'); !!}
-                </div>
-                <div class="row">              
-                  {!! Form::number('to'); !!}
-                </div>
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-phone"></i></span>
+                <input name="to" id="to" type="text" class="form-control" placeholder="Telefone do Destinatário" aria-describedby="basic-addon1">
               </div>
-              
-              <div class="col-xs-12">              
-              
-                <div class="row">              
-                  {!! Form::label('msg', 'Texto'); !!}
-                </div>              
 
-                <div class="row">              
-                  {!! Form::textarea ('msg'); !!}
-                </div>
-              </div>
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-pencil"></i></span>
+                <textarea placeholder="Digite aqui a sua mensagem" class="form-control" name="msg" id="msg" rows="3"></textarea>
+              </div>                         
 
                             
             </div>
