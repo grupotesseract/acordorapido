@@ -27,9 +27,7 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
     public function model()
     {
         return Aviso::class;
-    }
-
-    
+    }    
 
     /**
      * Boot up the repository, pushing criteria
@@ -54,14 +52,14 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
                 ],
                 'json' => [
                     'sendSmsRequest' => [                        
-                        'from' => 'Acordo Rápido',
-                        'to' => $request['to'],
+                        'from' => 'AcordoRápido',
+                        'to' => '55'.$request['to'],
                         'msg' => $request['msg'],
                         'callbackOption' => 'NONE',
                         //SALVAR ID DO AVISO PREVIAMENTE CADASTRADO
                         //NO CASO DE ENVIOS SEPARADOS, DETECTAR ULTIMO ID
                         //PENSAR NESSA LÓGICA
-                        'id' => '999',
+                        'id' => '34',
                         'aggregateId' => '1111'
                     ]
                 ]

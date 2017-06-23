@@ -244,7 +244,6 @@ class TitulosController extends Controller
                 $cliente_id = $cliente->id;
                 
 
-                //IMPLEMENTAR FIRSTORNEW NO REPOSITÓRIO PRA FICAR BUNITIN
                 $titulo = Titulo::firstOrNew(['titulo' => $sheet->titulo]);
                 $titulo->estado = $estado;
                 $titulo->cliente_id = $cliente_id;
