@@ -6,6 +6,33 @@
 
 
 @section('main-content')
+ <table class="table table-striped table-hovered">
+  <thead>
+    <tr>
+      <th>Módulo</th>
+      <th>Número</th>
+      <th>Cliente</th>
+      <th>Vencimento</th>
+      <th>Valor</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach ($alunosComTitulos as $aluno)
+        @foreach ($aluno->titulos as $titulo)
+    <tr>
+      <td>{{ $titulo->estado }}</td>
+      <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
+      <td> {{ $titulo->cliente->nome }}</td>
+      <td> {{ $titulo->cliente->vencimento }}</td>
+      <td> {{ $titulo->cliente->valor }}</td>
+      <td><a href="{{ url('titulo/'.$titulo->id) }}">ver mais...</a></td>
+    </tr>
+    @endforeach
+    @endforeach
+  </tbody>
+
+</table>
   <div class="container-fluid spark-screen">
     <div class="row">
       <h3>Títulos</h3>

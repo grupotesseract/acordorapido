@@ -25,24 +25,26 @@
             <li class="active"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             
             <li class="treeview">
-                <a href="#"><i class='glyphicon glyphicon-comment'></i> <span>SMS</span><i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='glyphicon glyphicon-comment'></i> <span>Avisos</span><i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('avisos')}}">Listar SMS Enviados</a></li>
-                    <li><a href="{{url('avisos/create')}}">Enviar SMS</a></li>
+                    <li><a href="{{url('avisos')}}">Avisos enviados</a></li>
+                    <li><a href="{{url('avisos/create')}}">Enviar novo aviso</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#"><i class='glyphicon glyphicon-list-alt'></i> <span>Títulos</span><i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="{{url('titulos/azul')}}">Módulo Azul</a></li>
-                    <li><a href="{{url('titulos/verde')}}">Módulo Verde</a></li>
-                </ul>
+            <li>
+                <a href="{{ url('titulos') }}"><i class='glyphicon glyphicon-list-alt'></i> <span>Títulos</span></a>
+            </li>
+            <li>
+                <a href="{{ url('alunos') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>
+            </li>
+            <li>
+                <a href="{{ url('escolas') }}"><i class='glyphicon glyphicon-education'></i> <span>Escolas</span></a>
             </li>
             <li class="treeview">
                 <a href="#"><i class='glyphicon glyphicon-stats'></i> <span>Relatórios</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('titulos/poraluno')}}">por Alunos</a></li>
-                    <li><a href="{{url('titulos/porempresa')}}">por Empresas</a></li>
+                    <li><a href="#">por Alunos</a></li>
+                    <li><a href="#">por Empresas</a></li>
                 </ul>
             </li>
             <li class="treeview">
