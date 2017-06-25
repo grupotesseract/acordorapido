@@ -62,8 +62,11 @@ class TitulosController extends Controller
             ]);
         }
 
-        return view('titulos.index', compact('titulos'));
+        $alunosComTitulos = Cliente::with('titulos')->get();
+        // return view('titulos', compact('titulos'));
+        return view('alunos', compact('alunosComTitulos'));
     }
+
 
     /**
      * Store a newly created resource in storage.

@@ -7,28 +7,27 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ClienteCreateRequest;
-use App\Http\Requests\ClienteUpdateRequest;
-use App\Repositories\ClienteRepository;
-use App\Validators\ClienteValidator;
+use App\Http\Requests\EmpresaCreateRequest;
+use App\Http\Requests\EmpresaUpdateRequest;
+use App\Repositories\EmpresaRepository;
+use App\Validators\EmpresaValidator;
 
 
-class ClientesController extends Controller
+class EmpresasController extends Controller
 {
 
     /**
-     * @var ClienteRepository
+     * @var EmpresaRepository
      */
     protected $repository;
 
     /**
-     * @var ClienteValidator
+     * @var EmpresaValidator
      */
     protected $validator;
 
-    public function __construct(ClienteRepository $repository, ClienteValidator $validator)
+    public function __construct(EmpresaRepository $repository, EmpresaValidator $validator)
     {
-        $this->middleware('auth');
         $this->repository = $repository;
         $this->validator  = $validator;
     }
@@ -42,37 +41,37 @@ class ClientesController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $alunos = $this->repository->all();
+        $escolas = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $alunos,
+                'data' => $escolas,
             ]);
         }
 
-        return view('alunos.index', compact('alunos'));
+        return view('escolas.index', compact('escolas'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ClienteCreateRequest $request
+     * @param  EmpresaCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(ClienteCreateRequest $request)
+    public function store(EmpresaCreateRequest $request)
     {
 
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $cliente = $this->repository->create($request->all());
+            $empresa = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Cliente created.',
-                'data'    => $cliente->toArray(),
+                'message' => 'Empresa created.',
+                'data'    => $empresa->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -103,16 +102,16 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        $cliente = $this->repository->find($id);
+        $empresa = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $cliente,
+                'data' => $empresa,
             ]);
         }
 
-        return view('clientes.show', compact('cliente'));
+        return view('empresas.show', compact('empresa'));
     }
 
 
@@ -126,32 +125,32 @@ class ClientesController extends Controller
     public function edit($id)
     {
 
-        $cliente = $this->repository->find($id);
+        $empresa = $this->repository->find($id);
 
-        return view('clientes.edit', compact('cliente'));
+        return view('empresas.edit', compact('empresa'));
     }
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  ClienteUpdateRequest $request
+     * @param  EmpresaUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      */
-    public function update(ClienteUpdateRequest $request, $id)
+    public function update(EmpresaUpdateRequest $request, $id)
     {
 
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $cliente = $this->repository->update($request->all(), $id);
+            $empresa = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Cliente updated.',
-                'data'    => $cliente->toArray(),
+                'message' => 'Empresa updated.',
+                'data'    => $empresa->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -189,11 +188,11 @@ class ClientesController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Cliente deleted.',
+                'message' => 'Empresa deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Cliente deleted.');
+        return redirect()->back()->with('message', 'Empresa deleted.');
     }
 }

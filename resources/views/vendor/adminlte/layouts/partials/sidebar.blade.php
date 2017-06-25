@@ -18,7 +18,6 @@
             </div>
         @endif
 
-
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
@@ -28,12 +27,26 @@
             <li class="treeview">
                 <a href="#"><i class='glyphicon glyphicon-comment'></i> <span>Avisos</span><i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('#')}}">Listar Avisos Enviados</a></li>
-                    <li><a href="{{url('avisos/create')}}">Enviar Avisos</a></li>
+                    <li><a href="{{url('avisos')}}">Avisos enviados</a></li>
+                    <li><a href="{{url('avisos/create')}}">Enviar novo aviso</a></li>
                 </ul>
             </li>
-
-            <li><a href="#"><i class='glyphicon glyphicon-stats'></i> <span>Relatórios</span></a></li>
+            <li>
+                <a href="{{ url('titulos') }}"><i class='glyphicon glyphicon-list-alt'></i> <span>Títulos</span></a>
+            </li>
+            <li>
+                <a href="{{ url('alunos') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>
+            </li>
+            <li>
+                <a href="{{ url('escolas') }}"><i class='glyphicon glyphicon-education'></i> <span>Escolas</span></a>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='glyphicon glyphicon-stats'></i> <span>Relatórios</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="#">por Alunos</a></li>
+                    <li><a href="#">por Empresas</a></li>
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="#"><i class='glyphicon glyphicon-import'></i> <span>Importações</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

@@ -7,6 +7,99 @@
 
 @section('main-content')
 	<div class="container-fluid spark-screen">
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-6">
+					<!-- AREA CHART -->
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">Títulos ativos</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+						<div class="box-body">
+							<div class="chart">
+								<canvas id="titulosAtivos" style="height:250px"></canvas>
+							</div>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+
+					<!-- DONUT CHART -->
+					<div class="box box-danger">
+						<div class="box-header with-border">
+							<h3 class="box-title">Donut Chart</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+						<div class="box-body">
+							<canvas id="pieChart" style="height:250px"></canvas>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+
+				</div>
+				<!-- /.col (LEFT) -->
+				<div class="col-md-6">
+					<!-- LINE CHART -->
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h3 class="box-title">Line Chart</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+						<div class="box-body">
+							<div class="chart">
+								<canvas id="lineChart" style="height:250px"></canvas>
+							</div>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+
+					<!-- BAR CHART -->
+					<div class="box box-success">
+						<div class="box-header with-border">
+							<h3 class="box-title">Bar Chart</h3>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+						<div class="box-body">
+							<div class="chart">
+								<canvas id="barChart" style="height:230px"></canvas>
+							</div>
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+
+				</div>
+				<!-- /.col (RIGHT) -->
+			</div>
+			<!-- /.row -->
+
+		</section>
+
 		<div class="row">
 			<h3>Títulos</h3>
 			@foreach ($titulos as $titulo)
@@ -54,4 +147,59 @@
 			</div>
 		</div>
 	</div>
+
+
+<script>
+  $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
+    //-------------
+    //- LINE CHART -
+    //--------------
+    var lineChartCanvas = $("#titulosAtivos").get(0).getContext("2d");
+    var lineChart = new Chart(lineChartCanvas,
+    {
+    	type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [
+                    23,
+                    54,
+                    23,
+                    10
+                ],
+                backgroundColor: [
+                	'#0055ee',
+                	'#22dd22',
+                	'#eeff22',
+                	'#ff0000',
+                ],
+                label: 'Títulos ativos'
+            }],
+            labels: [
+                "Azul",
+                "Verde",
+                "Amarelo",
+                "Vermelho",
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'right',
+            },
+            title: {
+                display: false,
+                text: 'Títulos ativos'
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    });
+});
+</script>
 @endsection
