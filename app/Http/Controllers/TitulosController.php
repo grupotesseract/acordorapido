@@ -212,24 +212,29 @@ class TitulosController extends Controller
     }
 
     public function importacao($estado) {
-        return view('importacao')->with(['estado'=> $estado]);
+        $escolas = Empresa::all();
+        return view('importacao')->with(['estado'=> $estado, 'escolas' => $escolas]);
     }
 
 
 
     public function importa(TituloCreateRequest $request, string $estado)
     {
-        Excel::load($request->file('excel'), function($reader) use ($estado) {
+        
+        $empresa_id = $request->escola;
 
-            $reader->each(function($sheet) use ($estado) {
+        Excel::load($request->file('excel'), function($reader) use ($estado,$empresa_id) {
 
-                $empresa = Empresa::firstOrNew(['nome' => $sheet->escola]);
-                $empresa->nome = $sheet->escola;
-                $empresa->user_id = Auth::id();
-                $empresa->cidade = $sheet->cidade;
-                $empresa->estado = $sheet->estado;
-                $empresa->save();
-                $empresa_id = $empresa->id;
+            $reader->each(function($sheet) use ($estado,$empresa_id) {
+
+                //$empresa = Empresa::firstOrNew(['nome' => $sheet->escola]);
+                //$empresa->nome = $sheet->escola;
+                //$empresa->user_id = Auth::id();
+                //$empresa->cidade = $sheet->cidade;
+                //$empresa->estado = $sheet->estado;
+                //$empresa->save();
+                //$empresa_id = $empresa->id;
+
                 
 
                 $cliente = Cliente::firstOrNew(['rg' => $sheet->rg]);
@@ -247,7 +252,7 @@ class TitulosController extends Controller
                 $cliente_id = $cliente->id;
                 
 
-                $titulo = Titulo::firstOrNew(['titulo' => $sheet->titulo]);
+                $titulo = Titulo::firstOrNew(['titulo' => $sheet->titulo, 'empresa_id' => $empresa_id]);
                 $titulo->estado = $estado;
                 $titulo->cliente_id = $cliente_id;
                 $titulo->empresa_id = $empresa_id;
@@ -257,11 +262,15 @@ class TitulosController extends Controller
                 $titulo->titulo = $sheet->titulo;
                 $titulo->save();
 
-                
+                                
             });           
 
         });
 
+        if ($estado == 'verde') {
+            $this->repository->atualizaPagantes($empresa_id);
+        }
+            
         
 
         \Session::flash('flash_message_success', true);

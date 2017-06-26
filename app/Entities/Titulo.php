@@ -29,9 +29,9 @@ class Titulo extends Model
     }	
     
     /**
-     * Executa as funções quando o Titulo passa pro verde
+     * Atribui pago para todos os que não foram importados no módulo Verde
      */
-    public function ficaVerde($obj)
+    public function ficaPago($obj)
     {
         $titulo = Titulo::find($obj->id);
         $titulo->estado = "verde";
@@ -42,4 +42,5 @@ class Titulo extends Model
         // @todo
 
     }
+        
 }

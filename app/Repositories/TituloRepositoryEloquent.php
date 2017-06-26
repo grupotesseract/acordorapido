@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TituloRepository;
-use App\Titulo;
+use App\Titulo as Titulo;
 use App\Validators\TituloValidator;
 
 /**
@@ -42,5 +42,17 @@ class TituloRepositoryEloquent extends BaseRepository implements TituloRepositor
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * Atualiza para pago todos os titulos que não foram importados para o módulo VERDE
+     *
+     * @param      number  $empresa     ID da Empresa
+     */
+    public function atualizaPagantes ($empresa_id) {
+        Titulo::where('empresa_id',$empresa_id)
+              ->where('estado','azul')
+              ->where('pago',false)
+              ->update(['pago' => true]);
     }
 }
