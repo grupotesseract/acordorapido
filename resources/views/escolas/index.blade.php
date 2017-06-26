@@ -18,7 +18,7 @@
 	<tbody>
 		@foreach($escolas as $escola)
 		<tr>
-			<td>{{ ucwords(strtolower($escola->nome)) }}</td>
+			<td>{{ $escola->nome }}</td>
 			<td>{{ ucwords(strtolower($escola->cidade)) }}</td>
 			<td>{{ $escola->estado }}</td>
 			<td>{{ rand(10,30) }}</td>

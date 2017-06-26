@@ -25,7 +25,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::resource('avisos', AvisosController::class);
-
+Route::resource('alunos', ClientesController::class);
+Route::resource('escolas', EmpresasController::class);
 Route::resource('titulos', TitulosController::class);
 
 Route::get('importacao/{estado}', 'TitulosController@importacao');

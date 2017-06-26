@@ -21,11 +21,17 @@
       @foreach ($alunosComTitulos as $aluno)
         @foreach ($aluno->titulos as $titulo)
     <tr>
-      <td>{{ $titulo->estado }}</td>
+      <td>@if($titulo->estado == "azul")
+            <span class="label label-primary"> 
+          @elseif($titulo->estado == "verde")
+            <span class="label label-success"> 
+          @endif
+          {{ $titulo->estado }}
+          </span></td>
       <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
       <td> {{ $titulo->cliente->nome }}</td>
-      <td> {{ $titulo->cliente->vencimento }}</td>
-      <td> {{ $titulo->cliente->valor }}</td>
+      <td> {{ $titulo->vencimento }}</td>
+      <td> {{ $titulo->valor }}</td>
       <td><a href="{{ url('titulo/'.$titulo->id) }}">ver mais...</a></td>
     </tr>
     @endforeach
@@ -39,14 +45,16 @@
       @foreach ($alunosComTitulos as $aluno)
         @foreach ($aluno->titulos as $titulo)
         <div class="panel panel-default col-sm-3">
-          <div class="panel-heading">
-          <h4 class="estado-{{ $titulo->estado }}"> {{ $titulo->titulo }} @if($titulo->estado == "azul")
+         <div class="panel-heading">
+          <h4 class="estado-{{ $titulo->estado }}"> {{ $titulo->titulo }} 
+          </h4>
+          @if($titulo->estado == "azul")
             <span class="label label-primary"> 
           @elseif($titulo->estado == "verde")
             <span class="label label-success"> 
           @endif
           {{ $titulo->estado }}
-          </span></h4>
+          </span>
           </div>
 
         <div class="panel-body row">

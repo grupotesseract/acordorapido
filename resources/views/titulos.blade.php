@@ -23,9 +23,9 @@
       <td>{{ $titulo->estado }}</td>
       <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
       <td> {{ $titulo->cliente->nome }}</td>
-      <td> {{ $titulo->cliente->vencimento }}</td>
-      <td> {{ $titulo->cliente->valor }}</td>
-      <td><a href="{{ url('escola/'.$escola->id) }}">ver mais...</a></td>
+      <td> {{ $titulo->vencimento }}</td>
+      <td> {{ $titulo->valor }}</td>
+      <td><a href="{{ url('titulo/'.$titulo->id) }}">ver mais...</a></td>
     </tr>
     @endforeach
   </tbody>
@@ -33,17 +33,19 @@
 </table>
   <div class="container-fluid spark-screen">
     <div class="row">
-      <h3>Títsulos</h3>
+      <h3>Títulos</h3>
       @foreach ($titulos as $titulo)
         <div class="panel panel-default col-sm-4">
           <div class="panel-heading">
-          <h4 class="estado-{{ $titulo->estado }}"> {{ $titulo->titulo }} @if($titulo->estado == "azul")
+          <h4 class="estado-{{ $titulo->estado }}"> {{ $titulo->titulo }} 
+          </h4>
+          @if($titulo->estado == "azul")
             <span class="label label-primary"> 
           @elseif($titulo->estado == "verde")
             <span class="label label-success"> 
           @endif
           {{ $titulo->estado }}
-          </span></h4>
+          </span>
           </div>
 
         <div class="panel-body row">
@@ -58,23 +60,6 @@
         </div>
         </div>
         @endforeach
-        <!-- Default box -->
-<!--        <div class="box">
-          <div class="box-header with-border">
-            <h3 class="box-title">Home</h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fa fa-minus"></i></button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <div class="box-body">
-            {{ trans('adminlte_lang::message.logged') }}
-          </div>
-        </div>
- -->        <!-- /.box -->
 
       </div>
     </div>

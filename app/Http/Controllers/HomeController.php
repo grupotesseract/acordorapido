@@ -11,6 +11,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\Titulo as Titulo;
+use App\Aviso as Aviso;
 /**
  * Class HomeController
  * @package App\Http\Controllers
@@ -35,6 +36,7 @@ class HomeController extends Controller
     public function index()
     {
         $titulos = Titulo::all();
-        return view('home')->with('titulos', $titulos);
+        $avisos = Aviso::all();
+        return view('home')->with('avisos', $avisos)->with('titulos', $titulos);
     }
 }
