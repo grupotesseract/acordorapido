@@ -70,6 +70,5 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
         $result->getStatusCode();
         $response = $result->getBody();
 
-        dd($result);    
     }
 }
