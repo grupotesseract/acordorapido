@@ -1,11 +1,12 @@
 @extends('adminlte::layouts.app')
 
-@section('htmlheader_title', 'Enviar SMS')
+@section('htmlheader_title', 'Alunos')
 
-@section('contentheader_title', 'Enviar SMS')
+@section('contentheader_title', 'Alunos')
 
 @section('main-content')
-  <div class="container">
+
+<div class="container">
     <div class="row">
       <div class="col-xs-12">
       </div>
@@ -52,6 +53,6 @@
         {!! Form::close() !!}
       </div>
     </div>
-  </div>
-@endsection
+</div>
 
+@endsection
