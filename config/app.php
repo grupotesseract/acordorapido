@@ -181,6 +181,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
     ],
 
@@ -234,7 +235,8 @@ return [
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 
