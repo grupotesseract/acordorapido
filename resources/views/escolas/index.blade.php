@@ -23,8 +23,7 @@
 			<td>{{ $escola->estado }}</td>
 			<td>{{ rand(10,30) }}</td>
 			<td>
-				<a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-				<a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+				<a href="{{ url('escolas/'.$escola->id) }}"> Detalhes </a>
 			</td>
 		</tr>
 		@endforeach

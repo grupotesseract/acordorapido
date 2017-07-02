@@ -129,7 +129,8 @@ class ClientesController extends Controller
 
         $cliente = $this->repository->find($id);
 
-        return view('clientes.edit', compact('cliente'));
+        $aluno = $cliente;
+        return view('alunos.edit', compact('aluno'));
     }
 
 

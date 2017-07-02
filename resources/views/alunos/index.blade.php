@@ -31,8 +31,7 @@
 			<td>{{ $aluno->turma }}</td>
 			<td>
 			@role('admin')
-				<a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-				<a href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+				<a href="{{ url('alunos/'.$aluno->id) }}"> Detalhes </a>
 			@endrole
 			</td>
 		</tr>

@@ -103,6 +103,7 @@ class EmpresasController extends Controller
     public function show($id)
     {
         $empresa = $this->repository->find($id);
+        $empresa->titulos = 9;
 
         if (request()->wantsJson()) {
 
@@ -111,7 +112,8 @@ class EmpresasController extends Controller
             ]);
         }
 
-        return view('empresas.show', compact('empresa'));
+        $escola = $empresa;
+        return view('escolas.show', compact('escola'));
     }
 
 
@@ -127,7 +129,8 @@ class EmpresasController extends Controller
 
         $empresa = $this->repository->find($id);
 
-        return view('empresas.edit', compact('empresa'));
+        $escola = $empresa;
+        return view('escolas.edit', compact('escola'));
     }
 
 
