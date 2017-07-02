@@ -30,7 +30,7 @@ class EsqueletoSeeder extends Seeder
             $userEscola->save();
 
             $userAdmin = new App\User();
-            $userAdmin->name = "Edilson Alexandre Britto";
+            $userAdmin->name = "Edilson Britto";
             $userAdmin->email = "edilson.bauru@gmail.com";
             $userAdmin->password = bcrypt(env('ADMIN_PWD', '123321'));
             $userAdmin->save();

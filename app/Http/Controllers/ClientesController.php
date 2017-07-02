@@ -112,7 +112,8 @@ class ClientesController extends Controller
             ]);
         }
 
-        return view('clientes.show', compact('cliente'));
+        $aluno = $cliente;
+        return view('alunos.show', compact('aluno'));
     }
 
 
