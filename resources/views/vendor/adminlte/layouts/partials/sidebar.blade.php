@@ -24,6 +24,7 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             
+            @role('admin')
             <li class="treeview">
                 <a href="#"><i class='glyphicon glyphicon-comment'></i> <span>Avisos</span><i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
@@ -31,12 +32,21 @@
                     <li><a href="{{url('avisos/create')}}">Enviar novo aviso</a></li>
                 </ul>
             </li>
+            @endrole
             <li>
                 <a href="{{ url('titulos') }}"><i class='glyphicon glyphicon-list-alt'></i> <span>Títulos</span></a>
             </li>
+            @role('admin')
             <li>
                 <a href="{{ url('alunos') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>
             </li>
+            @endrole
+            @role('escola')
+            <li>
+                <a href="{{ url('alunos/2') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>
+            </li>
+            @endrole
+            @role('admin')
             <li>
                 <a href="{{ url('escolas') }}"><i class='glyphicon glyphicon-education'></i> <span>Escolas</span></a>
             </li>
@@ -57,6 +67,7 @@
                     
                 </ul>
             </li>
+            @endrole
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

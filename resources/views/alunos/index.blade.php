@@ -6,6 +6,8 @@
 
 @section('main-content')
 
+<div class="row">
+<div class="col-sm-12">
 <table class="table table-striped table-hovered">
 	<thead>
 		<tr>
@@ -15,7 +17,7 @@
 			<th>Telefone</th>
 			<th>RG</th>
 			<th>Turma</th>
-			<th></th>
+			<th>Ações</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -27,11 +29,21 @@
 			<td>{{ $aluno->telefone }}</td>
 			<td>{{ $aluno->rg }}</td>
 			<td>{{ $aluno->turma }}</td>
-			<td><a href="{{ url('aluno/'.$aluno->id) }}">ver mais...</a></td>
+			<td>
+			@role('admin')
+				<a href="{{ url('alunos/'.$aluno->id) }}"> Detalhes </a>
+			@endrole
+			</td>
 		</tr>
 		@endforeach
 	</tbody>
 
 </table>
+
+</div>
+	<div class="col-sm-12">
+		<a class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Aluno</a>	
+	</div>
+</div>
 
 @endsection

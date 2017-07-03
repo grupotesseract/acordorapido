@@ -14,7 +14,7 @@
       <div class="col-xs-12 margin-t-0-5 margin-b-0-5">
         <h4>Digite abaixo a sua mensagem</h4>
       </div>
-      <div class="col-xs-12">
+      <div class="col-xs-6">
         {!! Form::open(array('url'=>'sms','method'=>'POST', 'files'=>true)) !!}
           <div class="control-group">
             <div class="controls">

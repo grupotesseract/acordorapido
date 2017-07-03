@@ -12,7 +12,7 @@
 			<th>Cidade</th>
 			<th>Estado</th>
 			<th>Títulos</th>
-			<th></th>
+			<th>Ações</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,11 +22,16 @@
 			<td>{{ ucwords(strtolower($escola->cidade)) }}</td>
 			<td>{{ $escola->estado }}</td>
 			<td>{{ rand(10,30) }}</td>
-			<td><a href="{{ url('escola/'.$escola->id) }}">ver mais...</a></td>
+			<td>
+				<a href="{{ url('escolas/'.$escola->id) }}"> Detalhes </a>
+			</td>
 		</tr>
 		@endforeach
 	</tbody>
 
 </table>
 
+<div class="col-sm-12">
+<a class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Escola</a>	
+</div>
 @endsection
