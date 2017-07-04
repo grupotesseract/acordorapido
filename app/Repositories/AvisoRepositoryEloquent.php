@@ -52,13 +52,10 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
                 ],
                 'json' => [
                     'sendSmsRequest' => [                        
-                        'from' => $aviso['titulo'],
-                        'to' => '55'.$aviso['to'],
-                        'msg' => $aviso['texto'],
-                        'callbackOption' => 'NONE',
-                        //SALVAR ID DO AVISO PREVIAMENTE CADASTRADO
-                        //NO CASO DE ENVIOS SEPARADOS, DETECTAR ULTIMO ID
-                        //PENSAR NESSA LÓGICA
+                        'from' => $aviso->titulo,
+                        'to' => '55'.$aviso->to,
+                        'msg' => $aviso->texto,
+                        'callbackOption' => 'NONE',                        
                         'id' => $aviso->id,
                         'aggregateId' => $aviso->id
                     ]
