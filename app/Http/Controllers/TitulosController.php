@@ -26,6 +26,7 @@ use Maatwebsite\Excel\Collections\RowCollection;
 use Maatwebsite\Excel\Collections\SheetCollection;
 
 use Auth;
+use Carbon\Carbon as Carbon;
 
 class TitulosController extends Controller
 {
@@ -255,12 +256,14 @@ class TitulosController extends Controller
                 $titulo->valor = $sheet->valor;
                 $titulo->titulo = $sheet->titulo;
                 $titulo->save();
+
+                $vencimento = date('d-m-Y', strtotime(str_replace('-', '/', $titulo->vencimento)));
                
                 $user_id = Auth::id();
                 $this->avisoRepository->create(
                     [
                         'titulo' => 'Atenção!',
-                        'texto' => 'Sua fatura vence em: '.$titulo->vencimento.'',
+                        'texto' => 'Sua fatura vence em: '.$vencimento.'',
                         'user_id' => Auth::id(),
                         'cliente_id' => $cliente_id,
                         'status' => 0
