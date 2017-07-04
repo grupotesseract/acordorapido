@@ -50,7 +50,7 @@ class ImportacaosController extends Controller
             ]);
         }
 
-        return view('importacaos.index', compact('importacaos'));
+        return view('importacoes.index', compact('importacaos'));
     }
 
     /**
@@ -111,7 +111,7 @@ class ImportacaosController extends Controller
             ]);
         }
 
-        return view('importacaos.show', compact('importacao'));
+        return view('importacoes.show', compact('importacao'));
     }
 
 

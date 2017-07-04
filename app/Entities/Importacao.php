@@ -24,6 +24,25 @@ class Importacao extends Model
      */
     public function titulos()
     {
-        return $this->belongsTo('App\Titulo');
+        return $this->hasMany('App\Titulo');
+    }
+
+    public function titulosCount()
+    {
+      return $this->hasMany('App\Titulo')
+        ->selectRaw('importacao_id, count(*) as aggregate')
+        ->groupBy('importacao_id');
+    }
+
+    public function getTitulosCountAttribute()
+    {
+        // if relation is not loaded already, let's do it first
+        if ( ! array_key_exists('titulosCount', $this->relations)) 
+            $this->load('titulosCount');
+
+        $related = $this->getRelation('titulosCount');
+
+        // then return the count directly
+        return ($related) ? (int) $related->aggregate : 0;
     }
 }
