@@ -5,7 +5,6 @@
 @section('contentheader_title', 'Importar Planilha - Módulo '.ucfirst($estado))
 
 @section('main-content')
-  <div class="container">
     
     
     <div class="row">
@@ -26,11 +25,12 @@
 
 
     <div class="row">
+    <div class="col-sm-6">
       
       <h4>Escolha abaixo a planilha a ser importada</h4>
       
         {!! Form::open(array('url'=>'importa/'.$estado,'method'=>'POST', 'files'=>true)) !!}
-          <div class="form-grup">        
+          <div class="form-grup ">        
             
             <label for="sel1">Escolha a escola:</label>
             <select class="form-control" name="escola" id="escola">
@@ -54,6 +54,6 @@
           </div>
         {!! Form::close() !!}
     </div>
-  </div>
+    </div>
 @endsection
 

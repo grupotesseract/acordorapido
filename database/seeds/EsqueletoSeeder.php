@@ -30,6 +30,7 @@ class EsqueletoSeeder extends Seeder
             $userAdmin->email = "edilson.bauru@gmail.com";
             $userAdmin->password = bcrypt(env('ADMIN_PWD', '123321'));
             $userAdmin->save();
+
             // Criando entidades de aluno e escola e associando o user
             $c = new App\Cliente();
             $c->nome = "Evandro Barbosa Carreira";
@@ -42,11 +43,12 @@ class EsqueletoSeeder extends Seeder
             $e->estado = "SP";
             $c->user()->associate($userEscola);
             $e->save();
+
             // Criando funções dentro do sistema
             $escola = new App\Role();
             $escola->name         = 'escola';
             $escola->display_name = 'Instituição de ensino'; 
-            $escola->description  = 'Usuário autorizado a visualizar os dados referentes à sua escola'; 
+            $escola->description  = 'Usuário autorizado a visualizar os dados referentes à sua escola';
             $escola->save();
             $admin = new App\Role();
             $admin->name         = 'admin';
@@ -58,6 +60,7 @@ class EsqueletoSeeder extends Seeder
             $aluno->display_name = 'Usuário Aluno'; 
             $aluno->description  = 'Usuário autorizado a visualizar somente seus títulos e infos pessoais'; 
             $aluno->save();
+            
             // associando as funções aos usuários
             $userAluno->attachRole($aluno);
             $userEscola->attachRole($escola);

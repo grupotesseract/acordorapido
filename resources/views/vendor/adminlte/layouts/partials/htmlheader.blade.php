@@ -30,4 +30,10 @@
             echo json_encode($trans);
         @endphp
     </script>
+
+    <style>
+        .label .glyphicon {
+          top: 3px;
+      }
+    </style>
 </head>

@@ -11,6 +11,8 @@ use App\Http\Requests\TituloCreateRequest;
 use App\Http\Requests\TituloUpdateRequest;
 use App\Repositories\TituloRepository;
 use App\Repositories\AvisoRepository;
+use App\Repositories\ImportacaoRepository;
+
 
 use App\Validators\TituloValidator;
 
@@ -18,8 +20,6 @@ use App\Empresa as Empresa;
 use App\Cliente as Cliente;
 use App\Titulo as Titulo;
 use Redirect;
-
-
 
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Collections\RowCollection;
@@ -46,6 +46,8 @@ class TitulosController extends Controller
         $this->repository = $repository;
         $this->validator  = $validator;
         $this->avisoRepository = $avisoRepository;
+        //$this->importacaoRepository = $importacaoRepository;
+
         $this->middleware('auth');        
     }
 
@@ -67,9 +69,9 @@ class TitulosController extends Controller
             ]);
         }
 
-        $alunosComTitulos = Cliente::with('titulos')->get();
-        // return view('titulos', compact('titulos'));
-        return view('alunos', compact('alunosComTitulos'));
+        // $alunosComTitulos = Cliente::with('titulos')->get();
+        // return view('alunos', compact('alunosComTitulos'));
+        return view('titulos.index', compact('titulos'));
     }
 
 
