@@ -8,6 +8,7 @@ class Importacao extends Model
 {
 	public $timestamps = true;
 
+    protected $table = 'importacoes';
     protected $fillable = [
     ];
 
