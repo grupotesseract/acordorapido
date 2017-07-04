@@ -20,7 +20,7 @@
 		<tr>
 			<td>{{ $aviso->titulo }}</td>
 			<td>{{ $aviso->texto }}</td>
-			<td>{{ $aviso->cliente->nome }}</td>
+			<td>{{ isset($aviso->cliente->nome)? $aviso->cliente->nome : 'Cliente não cadastrado' }}</td>
 			<td>{{ $aviso->status }}</td>
 		</tr>
 		@endforeach

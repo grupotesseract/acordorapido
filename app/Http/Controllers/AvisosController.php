@@ -207,6 +207,8 @@ class AvisosController extends Controller
     
     public function enviarAviso (AvisoCreateRequest $request) 
     {   
+        $aviso = $this->repository->create($request->all());
+        
         $this->repository->enviarAviso($request);  
 
         //TRATAR RETORNO

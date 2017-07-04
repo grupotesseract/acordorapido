@@ -16,6 +16,8 @@
       </div>
       <div class="col-xs-6">
         {!! Form::open(array('url'=>'sms','method'=>'POST', 'files'=>true)) !!}
+          <input name="user_id" id="user_id" type="hidden" value="{{ Auth::id() }}">
+          
           <div class="control-group">
             <div class="controls">
               
@@ -38,8 +40,13 @@
 
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-pencil"></i></span>
-                <textarea placeholder="Digite aqui a sua mensagem" class="form-control" name="msg" id="msg" rows="3"></textarea>
-              </div>                         
+                <input name="titulo" id="titulo" type="text" class="form-control" placeholder="Título" aria-describedby="basic-addon1">
+              </div>
+
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-pencil"></i></span>
+                <textarea placeholder="Digite aqui a sua mensagem" class="form-control" name="texto" id="texto" rows="3"></textarea>
+              </div>                            
 
                             
             </div>

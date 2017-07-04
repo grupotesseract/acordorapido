@@ -229,17 +229,7 @@ class TitulosController extends Controller
 
         Excel::load($request->file('excel'), function($reader) use ($estado,$empresa_id) {
 
-            $reader->each(function($sheet) use ($estado,$empresa_id) {
-
-                //$empresa = Empresa::firstOrNew(['nome' => $sheet->escola]);
-                //$empresa->nome = $sheet->escola;
-                //$empresa->user_id = Auth::id();
-                //$empresa->cidade = $sheet->cidade;
-                //$empresa->estado = $sheet->estado;
-                //$empresa->save();
-                //$empresa_id = $empresa->id;
-
-                
+            $reader->each(function($sheet) use ($estado,$empresa_id) {                               
 
                 $cliente = Cliente::firstOrNew(['rg' => $sheet->rg]);
                 $cliente->nome = $sheet->nome;
