@@ -45,6 +45,7 @@ class TitulosController extends Controller
         $this->repository = $repository;
         $this->validator  = $validator;
         $this->avisoRepository = $avisoRepository;
+        $this->middleware('auth');        
     }
 
 
@@ -264,6 +265,18 @@ class TitulosController extends Controller
                 $titulo->valor = $sheet->valor;
                 $titulo->titulo = $sheet->titulo;
                 $titulo->save();
+               
+                $user_id = Auth::id();
+                $this->avisoRepository->create(
+                    [
+                        'titulo' => 'Atenção!',
+                        'texto' => 'Sua fatura vence em: '.$titulo->vencimento.'',
+                        'user_id' => Auth::id(),
+                        'cliente_id' => $cliente_id,
+                        'status' => 0
+                    ]
+
+                );
 
                                 
             });           

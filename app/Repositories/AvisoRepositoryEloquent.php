@@ -52,7 +52,7 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
                 ],
                 'json' => [
                     'sendSmsRequest' => [                        
-                        'from' => 'AcordoRápido',
+                        'from' => $request['titulo']?$request['titulo']: 'AcordoRápido',
                         'to' => '55'.$request['to'],
                         'msg' => $request['msg'],
                         'callbackOption' => 'NONE',

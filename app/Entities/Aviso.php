@@ -11,6 +11,9 @@ class Aviso extends Model
     protected $fillable = [
         'texto',
         'titulo',
+        'user_id',
+        'cliente_id',
+        'status'
     ];
 
     /**
