@@ -10,6 +10,8 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\TituloCreateRequest;
 use App\Http\Requests\TituloUpdateRequest;
 use App\Repositories\TituloRepository;
+use App\Repositories\AvisoRepository;
+
 use App\Validators\TituloValidator;
 
 use App\Empresa as Empresa;
@@ -38,10 +40,11 @@ class TitulosController extends Controller
      */
     protected $validator;
 
-    public function __construct(TituloRepository $repository, TituloValidator $validator)
+    public function __construct(TituloRepository $repository, TituloValidator $validator, AvisoRepository $avisoRepository)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
+        $this->avisoRepository = $avisoRepository;
     }
 
 
