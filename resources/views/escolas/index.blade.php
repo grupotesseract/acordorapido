@@ -23,7 +23,7 @@
 			<td>{{ $escola->estado }}</td>
 			<td>{{ rand(10,30) }}</td>
 			<td>
-				<a href="{{ url('escolas/'.$escola->id) }}"> Detalhes </a>
+				<a class="btn btn-sm btn-default" href="{{ url('escolas/'.$escola->id) }}"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> mais detalhes </a>
 			</td>
 		</tr>
 		@endforeach
@@ -32,6 +32,6 @@
 </table>
 
 <div class="col-sm-12">
-<a class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Escola</a>	
+<!-- <a class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Escola</a>	 -->
 </div>
 @endsection

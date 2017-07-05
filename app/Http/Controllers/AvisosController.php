@@ -57,6 +57,26 @@ class AvisosController extends Controller
     }
 
     /**
+     * Lista os avisos pendentes
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pendentes()
+    {
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $avisos = $this->repository->findByField('status', 0)->all();
+
+        if (request()->wantsJson()) {
+
+            return response()->json([
+                'data' => $avisos,
+            ]);
+        }
+
+        return view('avisos.index', compact('avisos'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  AvisoCreateRequest $request

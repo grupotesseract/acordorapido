@@ -29,8 +29,9 @@ Route::resource('alunos', ClientesController::class);
 Route::resource('escolas', EmpresasController::class);
 Route::resource('titulos', TitulosController::class);
 
-Route::get('importacao/{estado}', 'TitulosController@importacao');
+Route::get('avisospendentes', 'AvisosController@pendentes');
 
+Route::get('importacao/{estado}', 'TitulosController@importacao');
 Route::post('importa/{estado}', 'TitulosController@importa');
 
 Route::post('sms', 'AvisosController@enviarAviso');
