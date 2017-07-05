@@ -17,26 +17,26 @@ return [
             'verde',
             'amarelo',
             'vermelho',
-            'cinza'
+            'cinza',
         ],
 
         // list of all possible transitions
         'transitions' => [
             'fica_verde' => [
                 'from' => ['azul'],
-                'to' => 'verde',
+                'to'   => 'verde',
             ],
             'fica_amarelo' => [
-                'from' =>  ['verde'],
-                'to' => 'amarelo',
+                'from' => ['verde'],
+                'to'   => 'amarelo',
             ],
             'fica_vermelho' => [
                 'from' => ['amarelo'],
-                'to' => 'vermelho',
+                'to'   => 'vermelho',
             ],
             'fica_cinza' => [
                 'from' => ['azul', 'verde', 'amarelo', 'vermelho'],
-                'to' =>  'cinza',
+                'to'   => 'cinza',
             ],
         ],
 

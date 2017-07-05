@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTitulosTable extends Migration
 {
@@ -23,9 +23,9 @@ class CreateTitulosTable extends Migration
             $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->boolean('pago')->default(false);
             $table->date('vencimento')->nullable();
-            $table->decimal('valor',18,2);
+            $table->decimal('valor', 18, 2);
             $table->string('titulo');
-            
+
             $table->timestamps();
         });
     }
