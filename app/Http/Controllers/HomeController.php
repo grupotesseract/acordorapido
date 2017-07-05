@@ -37,6 +37,6 @@ class HomeController extends Controller
     {
         $titulos = Titulo::all();
         $avisos = Aviso::all();
-        return view('home')->with('avisos', $avisos)->with('titulos', $titulos);
+        return view('home')->with(['avisos' => $avisos, 'titulos' => $titulos]);
     }
 }
