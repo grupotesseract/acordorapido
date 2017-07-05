@@ -24,7 +24,7 @@
       <td>{{ $titulo->estado }}</td>
       <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
       <td> {{ $titulo->cliente->nome }}</td>
-      <td> {{ $titulo->created_at->addMonths(2)->format('d/m/Y H:i') }}</td>
+      <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
       <td> {{ $titulo->valor }}</td>
       <td>  
 

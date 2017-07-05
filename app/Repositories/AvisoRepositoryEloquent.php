@@ -39,7 +39,6 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
 
     public function enviarAviso ($aviso) 
     {
-
         $client = new Client(['base_uri' => 'https://api-rest.zenvia360.com.br/services/']); //GuzzleHttp\Client
         
         $result = $client->request('POST','send-sms', 
@@ -52,11 +51,11 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
                 ],
                 'json' => [
                     'sendSmsRequest' => [                        
-                        'from' => $aviso->titulo,
-                        'to' => '55'.$aviso->to,
-                        'msg' => $aviso->texto,
+                        'from' => $aviso['titulo'],
+                        'to' => '55'.$aviso['to'],
+                        'msg' => $aviso['texto'],
                         'callbackOption' => 'NONE',                        
-                        'aggregateId' => $aviso->id
+                        'aggregateId' => $aviso['id']
                     ]
                 ]
             ]

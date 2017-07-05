@@ -73,7 +73,7 @@ class TitulosController extends Controller
         }
 
         $titulos = Titulo::with(['avisos' => function ($query) {
-                                $query->where('status',0);
+                                $query->where('status',1);
                             }])->get();
         return view('titulos.index', compact('titulos'));
     }
@@ -269,9 +269,10 @@ class TitulosController extends Controller
                 $vencimento = date('d-m-Y', strtotime(str_replace('-', '/', $titulo->vencimento)));
                
                 $user_id = Auth::id();
+                $escola = Empresa::find($empresa_id)->nome;
                 $this->avisoRepository->create(
                     [
-                        'titulo' => 'Atenção!',
+                        'titulo' => $escola,
                         'texto' => 'Sua fatura vence em: '.$vencimento.'',
                         'user_id' => Auth::id(),
                         'cliente_id' => $cliente_id,

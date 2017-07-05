@@ -206,12 +206,17 @@ class AvisosController extends Controller
 
     
     public function pegaAviso ($aviso_id) {
-        $aviso = Aviso::find($aviso_id);
-        $telefone = $aviso->cliente->telefone;
-
+        $aviso = $this->repository->find($aviso_id);
         
+        $this->repository->enviarAviso([
+            'to' => $aviso->cliente->celular,
+            'titulo' => $aviso->titulo,
+            'texto' => $aviso->texto,
+            'id' => $aviso->cliente->id
+        ]); 
 
-        $this->repository->enviarAviso($this->repository->find($aviso_id)); 
+        $aviso->status = 1;
+        $aviso->save();
         return redirect()->back(); 
     }
 
