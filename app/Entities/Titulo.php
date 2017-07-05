@@ -17,7 +17,7 @@ class Titulo extends Model
      */
     public function cliente()
     {
-        return $this->belongsTo('App\Cliente', 'cliente_id');
+        return $this->belongsTo('App\Cliente');
     }	
 
   	/**
@@ -25,8 +25,13 @@ class Titulo extends Model
      */
     public function empresa()
     {
-        return $this->belongsTo('App\Empresa', 'empresa_id');
+        return $this->belongsTo('App\Empresa');
     }	
+
+    public function avisos()
+    {
+      return $this->hasMany('App\Aviso');
+    }
     
     /**
      * Atribui pago para todos os que não foram importados no módulo Verde
@@ -42,5 +47,7 @@ class Titulo extends Model
         // @todo
 
     }
+
+
         
 }

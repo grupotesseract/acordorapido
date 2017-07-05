@@ -13,7 +13,9 @@ class Aviso extends Model
         'titulo',
         'user_id',
         'cliente_id',
-        'status'
+        'status',
+        'titulo_id',
+        'estado'
     ];
 
     /**
@@ -30,5 +32,13 @@ class Aviso extends Model
     public function cliente()
     {
         return $this->belongsTo('App\Cliente');
+    }
+
+    /**
+     * Pertence a um titulo
+     */
+    public function titulo ()
+    {
+        return $this->belongsTo('App\Titulo');
     }
 }

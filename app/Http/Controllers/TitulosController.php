@@ -20,6 +20,7 @@ use App\Empresa as Empresa;
 use App\Cliente as Cliente;
 use App\Titulo as Titulo;
 use App\Importacao as Importacao;
+use App\Aviso as Aviso;
 
 use Redirect;
 
@@ -71,8 +72,7 @@ class TitulosController extends Controller
             ]);
         }
 
-        // $alunosComTitulos = Cliente::with('titulos')->get();
-        // return view('alunos', compact('alunosComTitulos'));
+        $titulos = Titulo::with('avisos')->get();
         return view('titulos.index', compact('titulos'));
     }
 
@@ -230,12 +230,13 @@ class TitulosController extends Controller
     public function importa(TituloCreateRequest $request, string $estado)
     {
         
-        Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado]);
+        $importacao = Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado]);
+        $importacao_id = $importacao->id;
         $empresa_id = $request->escola;
 
-        Excel::load($request->file('excel'), function($reader) use ($estado,$empresa_id) {
+        Excel::load($request->file('excel'), function($reader) use ($estado,$empresa_id,$importacao_id) {
 
-            $reader->each(function($sheet) use ($estado,$empresa_id) {                               
+            $reader->each(function($sheet) use ($estado,$empresa_id,$importacao_id ) {                               
 
                 $cliente = Cliente::firstOrNew(['rg' => $sheet->rg]);
                 $cliente->nome = $sheet->nome;
@@ -260,6 +261,7 @@ class TitulosController extends Controller
                 $titulo->vencimento = $sheet->vencimento;
                 $titulo->valor = $sheet->valor;
                 $titulo->titulo = $sheet->titulo;
+                $titulo->importacao_id = $importacao_id;
                 $titulo->save();
 
                 $vencimento = date('d-m-Y', strtotime(str_replace('-', '/', $titulo->vencimento)));
@@ -271,7 +273,9 @@ class TitulosController extends Controller
                         'texto' => 'Sua fatura vence em: '.$vencimento.'',
                         'user_id' => Auth::id(),
                         'cliente_id' => $cliente_id,
-                        'status' => 0
+                        'status' => 0,
+                        'estado' => $estado,
+                        'titulo_id' => $titulo->id
                     ]
 
                 );
