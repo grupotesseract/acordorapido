@@ -2,9 +2,9 @@
 
 namespace App;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -30,7 +30,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Pega a empresa do user
+     * Pega a empresa do user.
      */
     public function empresa()
     {
@@ -38,7 +38,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Pega o cliente do user
+     * Pega o cliente do user.
      */
     public function cliente()
     {
@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Pega os avisos desse usuario
+     * Pega os avisos desse usuario.
      */
     public function avisos()
     {

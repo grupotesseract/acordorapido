@@ -2,20 +2,18 @@
 
 namespace App\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\EmpresaRepository;
 use App\Empresa;
 use App\Validators\EmpresaValidator;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
- * Class EmpresaRepositoryEloquent
- * @package namespace App\Repositories;
+ * Class EmpresaRepositoryEloquent.
  */
 class EmpresaRepositoryEloquent extends BaseRepository implements EmpresaRepository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -25,18 +23,17 @@ class EmpresaRepositoryEloquent extends BaseRepository implements EmpresaReposit
     }
 
     /**
-    * Specify Validator class name
-    *
-    * @return mixed
-    */
+     * Specify Validator class name.
+     *
+     * @return mixed
+     */
     public function validator()
     {
         return EmpresaValidator::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {

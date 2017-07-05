@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateClientesTable extends Migration
 {
@@ -27,7 +27,6 @@ class CreateClientesTable extends Migration
             $table->string('telefone2')->nullable();
             $table->string('celular2')->nullable();
             $table->string('rg');
-
         });
     }
 

@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-	public $timestamps = true;
+    public $timestamps = true;
 
     protected $fillable = [
         'nome',
     ];
 
     /**
-     * Pega o usuário desse cliente
+     * Pega o usuário desse cliente.
      */
     public function user()
     {
@@ -21,15 +21,10 @@ class Cliente extends Model
     }
 
     /**
-     * Pega os titulos desse usuario
+     * Pega os titulos desse usuario.
      */
     public function titulos()
     {
         return $this->hasMany('App\Titulo');
     }
-
-    
-    
-
-
 }
