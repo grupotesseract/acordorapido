@@ -14,6 +14,7 @@
       <th>Cliente</th>
       <th>Vencimento</th>
       <th>Valor</th>
+      <th>Importado em</th>
       <th>Ações</th>
       <th></th>
     </tr>
@@ -25,7 +26,9 @@
       <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
       <td> {{ $titulo->cliente->nome }}</td>
       <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
+
       <td> {{ $titulo->valor }}</td>
+      <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
       <td>  
 
         @foreach ($titulo->avisos as $aviso)

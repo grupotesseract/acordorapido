@@ -9,8 +9,21 @@
     
     <div class="row">
 
+    <?php 
+    switch($estado) {
+      case "azul":
+        $bootstrapClass = "info";
+        break;
+      case "verde":
+        $bootstrapClass = "success";
+        break;
+      case "amarelo":
+        $bootstrapClass = "warning";
+        break;
+    }
+    ?>
     @if(Session::has('flash_message_success'))
-      <div class="alert alert-success alert-dismissible">
+      <div class="alert alert-{{ $bootstrapClass }} alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           <h4><i class="icon fa fa-check"></i> Sucesso!</h4>
           <em>{!! session('flash_message') !!}</em>

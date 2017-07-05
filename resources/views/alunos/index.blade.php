@@ -30,9 +30,7 @@
 			<td>{{ $aluno->rg }}</td>
 			<td>{{ $aluno->turma }}</td>
 			<td>
-			@role('admin')
-				<a href="{{ url('alunos/'.$aluno->id) }}"> Detalhes </a>
-			@endrole
+				<a class="btn btn-sm btn-default" href="{{ url('alunos/'.$aluno->id) }}"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> mais detalhes </a>
 			</td>
 		</tr>
 		@endforeach
@@ -42,7 +40,7 @@
 
 </div>
 	<div class="col-sm-12">
-		<a class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Aluno</a>	
+		<!-- <a class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Adicionar Aluno</a>	 -->
 	</div>
 </div>
 
