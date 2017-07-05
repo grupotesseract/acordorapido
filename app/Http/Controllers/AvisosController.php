@@ -205,6 +205,17 @@ class AvisosController extends Controller
     }
 
     
+    public function pegaAviso ($aviso_id) {
+        $aviso = Aviso::find($aviso_id);
+        $telefone = $aviso->cliente->telefone;
+
+        
+
+        $this->repository->enviarAviso($this->repository->find($aviso_id)); 
+        return redirect()->back(); 
+    }
+
+
     public function enviarAviso (AvisoCreateRequest $request) 
     {   
         $aviso = $this->repository->create($request->all());

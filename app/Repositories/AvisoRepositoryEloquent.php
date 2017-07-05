@@ -56,7 +56,6 @@ class AvisoRepositoryEloquent extends BaseRepository implements AvisoRepository
                         'to' => '55'.$aviso->to,
                         'msg' => $aviso->texto,
                         'callbackOption' => 'NONE',                        
-                        'id' => $aviso->id,
                         'aggregateId' => $aviso->id
                     ]
                 ]

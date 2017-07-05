@@ -23,7 +23,7 @@
 			<td>{{ $aviso->texto }}</td>
 			<td>{{ isset($aviso->cliente->nome)? $aviso->cliente->nome : 'Cliente não cadastrado' }}</td>
 			<td>{{ !$aviso->status? 'Agendado para Envio' : 'Enviado' }}</td>
-			<td><a href="/avisos/create" class="btn btn-default"> <span class="glyphicon glyphicon-comment" alt="Enviar SMS" aria-hidden="true"></span></a></td>
+			<td><a href="avisos/sms/{{$aviso->id}}" class="btn btn-default"> <span class="glyphicon glyphicon-comment" alt="Enviar SMS" aria-hidden="true"></span></a></td>
 		</tr>
 		@endforeach
 	</tbody>
