@@ -9,7 +9,7 @@ class Importacao extends Model
 	public $timestamps = true;
 
     protected $table = 'importacoes';
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id','modulo'];
 
     /**
      * Pega o usuário que realizou a importação

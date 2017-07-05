@@ -19,6 +19,8 @@ use App\Validators\TituloValidator;
 use App\Empresa as Empresa;
 use App\Cliente as Cliente;
 use App\Titulo as Titulo;
+use App\Importacao as Importacao;
+
 use Redirect;
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -228,6 +230,7 @@ class TitulosController extends Controller
     public function importa(TituloCreateRequest $request, string $estado)
     {
         
+        Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado]);
         $empresa_id = $request->escola;
 
         Excel::load($request->file('excel'), function($reader) use ($estado,$empresa_id) {
