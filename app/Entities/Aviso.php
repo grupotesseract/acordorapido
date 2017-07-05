@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Aviso extends Model
 {
-	public $timestamps = true;
+    public $timestamps = true;
 
     protected $fillable = [
         'texto',
@@ -15,11 +15,11 @@ class Aviso extends Model
         'cliente_id',
         'status',
         'titulo_id',
-        'estado'
+        'estado',
     ];
 
     /**
-     * Pega o usuário do aviso
+     * Pega o usuário do aviso.
      */
     public function user()
     {
@@ -27,7 +27,7 @@ class Aviso extends Model
     }
 
     /**
-     * Pega o cliente do aviso
+     * Pega o cliente do aviso.
      */
     public function cliente()
     {
@@ -35,9 +35,9 @@ class Aviso extends Model
     }
 
     /**
-     * Pertence a um titulo
+     * Pertence a um titulo.
      */
-    public function titulo ()
+    public function titulo()
     {
         return $this->belongsTo('App\Titulo');
     }

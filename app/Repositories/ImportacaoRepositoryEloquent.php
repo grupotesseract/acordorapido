@@ -2,20 +2,17 @@
 
 namespace App\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\ImportacaoRepository;
 use App\Entities\Importacao;
-use App\Validators\ImportacaoValidator;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
- * Class ImportacaoRepositoryEloquent
- * @package namespace App\Repositories;
+ * Class ImportacaoRepositoryEloquent.
  */
 class ImportacaoRepositoryEloquent extends BaseRepository implements ImportacaoRepository
 {
     /**
-     * Specify Model class name
+     * Specify Model class name.
      *
      * @return string
      */
@@ -24,10 +21,8 @@ class ImportacaoRepositoryEloquent extends BaseRepository implements ImportacaoR
         return Importacao::class;
     }
 
-    
-
     /**
-     * Boot up the repository, pushing criteria
+     * Boot up the repository, pushing criteria.
      */
     public function boot()
     {

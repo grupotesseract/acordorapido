@@ -5,8 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface EmpresaRepository
- * @package namespace App\Repositories;
+ * Interface EmpresaRepository.
  */
 interface EmpresaRepository extends RepositoryInterface
 {

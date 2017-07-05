@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateColunasAvisos extends Migration
 {
@@ -18,7 +18,6 @@ class CreateColunasAvisos extends Migration
             $table->foreign('titulo_id')->references('id')->on('titulos');
 
             $table->string('estado')->nullable();
-
         });
     }
 

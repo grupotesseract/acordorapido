@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\ClienteCreateRequest;
 use App\Http\Requests\ClienteUpdateRequest;
 use App\Repositories\ClienteRepository;
 use App\Validators\ClienteValidator;
-
+use Illuminate\Http\Request;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class ClientesController extends Controller
 {
-
     /**
      * @var ClienteRepository
      */
@@ -30,9 +26,8 @@ class ClientesController extends Controller
     {
         $this->middleware('auth');
         $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->validator = $validator;
     }
-
 
     /**
      * Display a listing of the resource.
@@ -45,7 +40,6 @@ class ClientesController extends Controller
         $alunos = $this->repository->all();
 
         if (request()->wantsJson()) {
-
             return response()->json([
                 'data' => $alunos,
             ]);
@@ -57,15 +51,13 @@ class ClientesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ClienteCreateRequest $request
+     * @param ClienteCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      */
     public function store(ClienteCreateRequest $request)
     {
-
         try {
-
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $cliente = $this->repository->create($request->all());
@@ -76,7 +68,6 @@ class ClientesController extends Controller
             ];
 
             if ($request->wantsJson()) {
-
                 return response()->json($response);
             }
 
@@ -85,7 +76,7 @@ class ClientesController extends Controller
             if ($request->wantsJson()) {
                 return response()->json([
                     'error'   => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessageBag(),
                 ]);
             }
 
@@ -93,11 +84,10 @@ class ClientesController extends Controller
         }
     }
 
-
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -106,47 +96,43 @@ class ClientesController extends Controller
         $cliente = $this->repository->find($id);
 
         if (request()->wantsJson()) {
-
             return response()->json([
                 'data' => $cliente,
             ]);
         }
 
         $aluno = $cliente;
+
         return view('alunos.show', compact('aluno'));
     }
-
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-
         $cliente = $this->repository->find($id);
 
         $aluno = $cliente;
+
         return view('alunos.edit', compact('aluno'));
     }
-
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  ClienteUpdateRequest $request
-     * @param  string            $id
+     * @param ClienteUpdateRequest $request
+     * @param string               $id
      *
      * @return Response
      */
     public function update(ClienteUpdateRequest $request, $id)
     {
-
         try {
-
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $cliente = $this->repository->update($request->all(), $id);
@@ -157,18 +143,15 @@ class ClientesController extends Controller
             ];
 
             if ($request->wantsJson()) {
-
                 return response()->json($response);
             }
 
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
-
             if ($request->wantsJson()) {
-
                 return response()->json([
                     'error'   => true,
-                    'message' => $e->getMessageBag()
+                    'message' => $e->getMessageBag(),
                 ]);
             }
 
@@ -176,11 +159,10 @@ class ClientesController extends Controller
         }
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -189,7 +171,6 @@ class ClientesController extends Controller
         $deleted = $this->repository->delete($id);
 
         if (request()->wantsJson()) {
-
             return response()->json([
                 'message' => 'Cliente deleted.',
                 'deleted' => $deleted,
