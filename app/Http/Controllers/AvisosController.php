@@ -12,8 +12,9 @@ use App\Http\Requests\AvisoUpdateRequest;
 use App\Repositories\AvisoRepository;
 use App\Validators\AvisoValidator;
 
+use App\Entities\AvisoEnviado as AvisoEnviado;
 
-
+use Auth;
 
 class AvisosController extends Controller
 {
@@ -235,7 +236,15 @@ class AvisosController extends Controller
             'id' => $aviso->cliente->id
         ]); 
 
-        $aviso->status = 1;
+        //$aviso->status = 1;
+        $avisoenviado = new AvisoEnviado;
+        $avisoenviado->user_id = Auth::id();
+        $avisoenviado->aviso_id = $aviso->id;
+        $avisoenviado->estado = $aviso->estado;
+        $avisoenviado->tipodeaviso = 0; //SMS
+        $avisoenviado->status = 1; //Terá código de retorno da API    
+
+        $avisoenviado->save();
         $aviso->save();
         return redirect()->back(); 
     }
