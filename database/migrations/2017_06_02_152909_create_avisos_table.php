@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateAvisosTable extends Migration
 {
@@ -19,7 +19,7 @@ class CreateAvisosTable extends Migration
             $table->text('texto');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            
+
             $table->timestamps();
 
             $table->integer('cliente_id')->unsigned()->nullable();

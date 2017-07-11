@@ -7,14 +7,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use Illuminate\Http\Request;
-
-use App\Titulo as Titulo;
 use App\Aviso as Aviso;
+use App\Titulo as Titulo;
+
 /**
- * Class HomeController
- * @package App\Http\Controllers
+ * Class HomeController.
  */
 class HomeController extends Controller
 {
@@ -37,6 +34,7 @@ class HomeController extends Controller
     {
         $titulos = Titulo::all();
         $avisos = Aviso::all();
+
         return view('home')->with(['avisos' => $avisos, 'titulos' => $titulos]);
     }
 }

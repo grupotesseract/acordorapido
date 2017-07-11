@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Importacao extends Model
 {
-	public $timestamps = true;
+    public $timestamps = true;
 
     protected $table = 'importacoes';
-    protected $fillable = ['user_id','modulo'];
+    protected $fillable = ['user_id', 'modulo'];
 
     /**
-     * Pega o usuário que realizou a importação
+     * Pega o usuário que realizou a importação.
      */
     public function user()
     {
@@ -20,7 +20,7 @@ class Importacao extends Model
     }
 
     /**
-     * Pega os titulos da importação
+     * Pega os titulos da importação.
      */
     public function titulos()
     {
@@ -29,7 +29,7 @@ class Importacao extends Model
 
     public function titulosCount()
     {
-      return $this->hasMany('App\Titulo')
+        return $this->hasMany('App\Titulo')
         ->selectRaw('importacao_id, count(*) as aggregate')
         ->groupBy('importacao_id');
     }
@@ -37,8 +37,9 @@ class Importacao extends Model
     public function getTitulosCountAttribute()
     {
         // if relation is not loaded already, let's do it first
-        if ( ! array_key_exists('titulosCount', $this->relations)) 
+        if (!array_key_exists('titulosCount', $this->relations)) {
             $this->load('titulosCount');
+        }
 
         $related = $this->getRelation('titulosCount');
 
