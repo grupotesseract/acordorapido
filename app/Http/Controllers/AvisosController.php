@@ -215,7 +215,7 @@ class AvisosController extends Controller
             'id'     => $aviso->cliente->id,
         ]);
 
-        //$aviso->status = 1;
+        $aviso->status = $aviso->status + 1;
         $avisoenviado = new AvisoEnviado;
         $avisoenviado->user_id = Auth::id();
         $avisoenviado->aviso_id = $aviso->id;

@@ -57,7 +57,7 @@ class TitulosController extends Controller
         }
 
         $titulos = Titulo::with(['avisos' => function ($query) {
-            $query->where('status', 1);
+            $query->where('status','>=',1);
         }])->get();
 
         return view('titulos.index', compact('titulos'));

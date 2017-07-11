@@ -41,4 +41,9 @@ class Aviso extends Model
     {
         return $this->belongsTo('App\Titulo');
     }
+
+    public function avisosenviados()
+    {
+        return $this->hasMany('App\Entities\AvisoEnviado', 'aviso_id', 'id');
+    }
 }

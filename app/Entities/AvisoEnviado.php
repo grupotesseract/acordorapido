@@ -14,4 +14,9 @@ class AvisoEnviado extends Model implements Transformable
 
     protected $fillable = ['user_id', 'aviso_id', 'estado', 'tipodeaviso', 'status'];
 
+    public function aviso()
+    {
+        return $this->belongsTo('App\Aviso');
+    }
+
 }
