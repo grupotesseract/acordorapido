@@ -210,7 +210,7 @@ class AvisosController extends Controller
 
         $this->repository->enviarAviso([
             'to'     => $aviso->cliente->celular,
-            'titulo' => $aviso->titulo,
+            'titulo' => $aviso->tituloaviso,
             'texto'  => $aviso->texto,
             'id'     => $aviso->cliente->id,
         ]);

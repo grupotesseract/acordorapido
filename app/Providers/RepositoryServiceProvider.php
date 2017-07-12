@@ -36,6 +36,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\AvisoEnviadoRepository::class, \App\Repositories\AvisoEnviadoRepositoryEloquent::class);
         
         $this->app->bind(\App\Repositories\AvisoEnviadoRepository::class, \App\Repositories\AvisoEnviadoRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\ModeloAvisoRepository::class, \App\Repositories\ModeloAvisoRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\ModeloAvisoRepository::class, \App\Repositories\ModeloAvisoRepositoryEloquent::class);
         //:end-bindings:
     }
 }

@@ -15,8 +15,13 @@ class CreateAvisoEnviadosTable extends Migration
 	{
 		Schema::create('aviso_enviados', function(Blueprint $table) {
             $table->increments('id');
-
             $table->timestamps();
+
+            $table->integer('empresa_id')->unsigned();
+            $table->foreign('empresa_id')->references('id')->on('empresas');
+
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
 		});
 	}
 

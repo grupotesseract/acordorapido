@@ -28,6 +28,7 @@ Route::resource('avisos', AvisosController::class);
 Route::resource('alunos', ClientesController::class);
 Route::resource('escolas', EmpresasController::class);
 Route::resource('titulos', TitulosController::class);
+Route::resource('avisomodelos', ModeloAvisosController::class);
 
 Route::get('avisospendentes', 'AvisosController@pendentes');
 

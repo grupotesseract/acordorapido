@@ -106,7 +106,7 @@
 								<tbody>
 									@foreach($avisos as $aviso)
 									<tr>
-										<td>{{ $aviso->titulo }}</td>
+										<td>{{ $aviso->tituloaviso }}</td>
 										<td>{{ $aviso->texto }}</td>
 										<td>{{ $aviso->cliente->nome }}</td>
 										<td>{{ $aviso->created_at }}</td>

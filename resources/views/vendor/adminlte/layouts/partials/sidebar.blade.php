@@ -30,6 +30,8 @@
                 <ul class="treeview-menu">
                     <li><a href="{{ url('avisos') }}">Avisos</a></li>
                     <li><a href="{{ url('avisospendentes') }}">Avisos Pendentes</a></li>
+                    <li><a href="{{ url('avisomodelos') }}">Modelos de Avisos</a></li>
+
                     <li><a href="{{ url('avisos/create') }}">Enviar SMS para um Número</a></li>
                 </ul>
             </li>
