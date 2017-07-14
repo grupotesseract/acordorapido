@@ -23,7 +23,7 @@ class EsqueletoSeeder extends Seeder
             $userAluno->password = bcrypt(env('ADMIN_PWD', '123321'));
             $userAluno->save();
             $userEscola = new App\User();
-            $userEscola->name = 'ITE';
+            $userEscola->name = 'Escola Teste';
             $userEscola->email = 'toledo@ite.edu.br';
             $userEscola->password = bcrypt(env('ADMIN_PWD', '123321'));
             $userEscola->save();
@@ -39,11 +39,12 @@ class EsqueletoSeeder extends Seeder
             $c->rg = '46.755.061-2';
             $c->user()->associate($userAluno);
             $c->save();
+
             $e = new App\Empresa();
-            $e->nome = 'ITE';
+            $e->nome = 'EscolaTeste';
             $e->cidade = 'Bauru';
             $e->estado = 'SP';
-            $c->user()->associate($userEscola);
+            $e->user()->associate($userEscola);
             $e->save();
 
             // Criando funções dentro do sistema
