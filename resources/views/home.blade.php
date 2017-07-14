@@ -12,53 +12,7 @@
 		<section class="content">
 			<div class="row">
 			<!-- MÓDULOS -->
-				<div class="col-md-9">
-					<div class="box box-default">
-						<div class="box-header with-border">
-							<h3 class="box-title">Títulos por módulos</h3>
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-							</div>
-						</div>
-						<div class="box-body">
-							<div class="row">
-								<div class="col-sm-12">
-									<div class="chart">
-										<canvas id="titulosTotal" style="height:150px"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- /.box-body -->
-					</div>
-				</div>
-				<div class="col-md-3">
-				<!-- Títulos totais -->
-				<div class="box box-info">
-					<div class="box-header with-border">
-						<h3 class="box-title">Títulos totais</h3>
-
-						<div class="box-tools pull-right">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-							</button>
-							<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-						</div>
-					</div>
-					<div class="box-body">
-						<div class="row">
-						<div class="chart col-sm-4">
-								<canvas id="titulosPagos" style="height:150px"></canvas>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /.box -->
-				</div>
-
-					<!-- /.box -->
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<!-- AREA CHART -->
 					<div class="box box-default">
 						<div class="box-header with-border">
@@ -81,11 +35,11 @@
 
 				</div>
 				<!-- /.col (LEFT) -->
-				<div class="col-md-6">
+				<div class="col-md-7">
 					<!-- LINE CHART -->
 					<div class="box box-info">
 						<div class="box-header with-border">
-							<h3 class="box-title">Últimos Avisos</h3>
+							<h3 class="box-title">Últimas Importações</h3>
 
 							<div class="box-tools pull-right">
 								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -97,10 +51,10 @@
 							<table class="table table-striped table-hovered">
 								<thead>
 									<tr>
-										<th>Título</th>
-										<th>Mensagem</th>
-										<th>Destinatário</th>
-										<th>Enviado em</th>
+										<th>Data</th>
+										<th>Módulo</th>
+										<th>Títulos</th>
+										<th>Avisos</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -220,95 +174,6 @@
                 animateScale: true,
                 animateRotate: true
             }
-        }
-    });
- 
- 	var titulosPagosCanvas = $("#titulosPagos").get(0).getContext("2d");
-    var titulosPagos = new Chart(titulosPagosCanvas,
-    {
-    	type: 'pie',
-        data: {
-            datasets: [{
-                data: [
-                    10,
-                    45,
-                ],
-                backgroundColor: [
-                	'#99ABAA',
-                	'#00C0EF',
-                ],
-            }],
-            labels: [
-                "Pagos",
-                "Ativos",
-            ]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: 'none',
-            },
-            title: {
-                display: false,
-                text: 'Títulos ativos'
-            },
-            animation: {
-                animateScale: true,
-                animateRotate: true
-            }
-        }
-    });
-
-    var titulosTotalCanvas = $("#titulosTotal").get(0).getContext("2d"); 
-    var titulosTotal = new Chart(titulosTotalCanvas,
-    {
-    	type: 'line',
-        data: { 
-        	labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho"],
-        	datasets: [{
-        		label: "Módulo Azul",
-        		// backgroundColor: '#0275D8',
-        		borderColor: '#0275D8',
-        		data: [
-	        		44,
-	        		33,
-	        		10,
-	        		45,
-	        		33,
-	        		10,
-	        		40
-        		]
-        	},{
-        		label: "Módulo Verde",
-        		// backgroundColor: '#0275D8',
-        		borderColor: '#5CB85C',
-        		data: [
-	        		3,
-	        		14,
-	        		25,
-	        		10,
-	        		24,
-	        		33,
-	        		20
-        		]
-        	},{
-        		label: "Módulo Amarelo",
-        		// backgroundColor: '#0275D8',
-        		borderColor: '#F0BD4E',
-        		data: [
-	        		0,
-	        		0,
-	        		0,
-	        		0,
-	        		1,
-	        		2,
-	        		6
-        		]
-        	},
-        	]
-        },
-        options: {
-          
         }
     });
 
