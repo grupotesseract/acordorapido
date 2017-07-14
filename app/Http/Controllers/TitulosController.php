@@ -237,7 +237,7 @@ class TitulosController extends Controller
                 $escola = Empresa::find($empresa_id)->nome;
                 $this->avisoRepository->create(
                     [
-                        'titulo'     => $escola,
+                        'tituloaviso' => $escola,
                         'texto'      => 'Sua fatura vence em: '.$vencimento.'',
                         'user_id'    => Auth::id(),
                         'cliente_id' => $cliente_id,

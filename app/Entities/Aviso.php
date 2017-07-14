@@ -10,7 +10,7 @@ class Aviso extends Model
 
     protected $fillable = [
         'texto',
-        'titulo',
+        'tituloaviso',
         'user_id',
         'cliente_id',
         'status',
