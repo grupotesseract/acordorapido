@@ -9,6 +9,8 @@ namespace App\Http\Controllers;
 
 use App\Aviso as Aviso;
 use App\Titulo as Titulo;
+use App\Importacao as Importacao;
+
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -49,12 +51,17 @@ class HomeController extends Controller
             }
             $titulos = Titulo::where('empresa_id', $empresa->id);
             $avisos = Aviso::where('empresa_id', $empresa->id);
+            $importacoes = Importacao::allwhere('empresa_id', $empresa->id);
+
         }
         if ($u->hasRole('admin')) {
             $titulos = Titulo::all();
             $avisos = Aviso::all();
+            $importacoes = Importacao::all();
+
         }
 
-        return view('home')->with(['avisos' => $avisos, 'titulos' => $titulos]);
+
+        return view('home')->with(['avisos' => $avisos, 'titulos' => $titulos, 'importacoes' => $importacoes]);
     }
 }

@@ -200,7 +200,7 @@ class TitulosController extends Controller
 
     public function importa(TituloCreateRequest $request, string $estado)
     {
-        $importacao = Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado]);
+        $importacao = Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado, 'empresa_id' => $request->escola]);
         $importacao_id = $importacao->id;
         $empresa_id = $request->escola;
 

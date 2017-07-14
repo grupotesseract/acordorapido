@@ -53,19 +53,19 @@
 									<tr>
 										<th>Data</th>
 										<th>Módulo</th>
-										<th>Títulos</th>
-										<th>Avisos</th>
+										<th>Escola</th>
+										
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($avisos as $aviso)
+									@forelse($importacoes as $importacao)
 									<tr>
-										<td>{{ $aviso->tituloaviso }}</td>
-										<td>{{ $aviso->texto }}</td>
-										<td>{{ $aviso->cliente->nome }}</td>
-										<td>{{ $aviso->created_at }}</td>
+										<td>{{ $importacao->created_at }}</td>
+										<td>{{ $importacao->modulo }}</td>
+										<td>{{ $importacao->empresa->nome }}</td>
 										</tr>
-									@endforeach
+									@empty
+									@endforelse
 								</tbody>
 							</table>
 						</div>
