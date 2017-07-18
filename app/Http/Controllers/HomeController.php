@@ -35,10 +35,7 @@ class HomeController extends Controller
     {
         $u = Auth::user();
         if($u->hasRole('aluno')) {
-            $cliente = $u->cliente;
-            if(!$cliente) dd("aluno não encontrado");
-            $titulos = Titulo::where('cliente_id', $cliente->id);
-            $avisos = Aviso::where('cliente_id', $cliente->id);
+            dd("Aluno ainda não possui tela de acesso");
         }
         if($u->hasRole('escola')) {
             $empresa = $u->empresa;
