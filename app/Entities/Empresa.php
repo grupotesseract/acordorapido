@@ -35,4 +35,14 @@ class Empresa extends Model
     {
         return $this->hasMany('App\Cliente');
     }
+
+    public function modeloavisos()
+    {
+        return $this->hasMany('App\ModeloAviso');
+    }
+
+    public function importacoes()
+    {
+        return $this->hasMany('App\Importacao');
+    }
 }

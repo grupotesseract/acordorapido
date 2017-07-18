@@ -10,7 +10,7 @@ class Aviso extends Model
 
     protected $fillable = [
         'texto',
-        'titulo',
+        'tituloaviso',
         'user_id',
         'cliente_id',
         'status',
@@ -40,5 +40,10 @@ class Aviso extends Model
     public function titulo()
     {
         return $this->belongsTo('App\Titulo');
+    }
+
+    public function avisosenviados()
+    {
+        return $this->hasMany('App\Entities\AvisoEnviado', 'aviso_id', 'id');
     }
 }

@@ -9,7 +9,7 @@ class Importacao extends Model
     public $timestamps = true;
 
     protected $table = 'importacoes';
-    protected $fillable = ['user_id', 'modulo'];
+    protected $fillable = ['user_id', 'modulo', 'empresa_id'];
 
     /**
      * Pega o usuário que realizou a importação.
@@ -17,6 +17,11 @@ class Importacao extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function empresa()
+    {
+        return $this->belongsTo('App\Empresa');
     }
 
     /**

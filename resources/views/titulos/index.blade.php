@@ -52,33 +52,38 @@
       <td>  
 
         @foreach ($titulo->avisos as $aviso)
-        @if (isset($aviso))
-        <?php 
-        switch ($aviso->estado) {
-          case 'azul':
-          $bootStrapClass = 'primary';
-          break;
-          case 'verde':
-          $bootStrapClass = 'success';
-          break;
-          case 'amarelo':
-          $bootStrapClass = 'warning';
-          break;
-          case 'vermelho':
-          $bootStrapClass = 'danger';
-          break;
-        }    
-        ?>
-        <span class="label label-{{ $bootStrapClass }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
-        @endif
+          @if (isset($aviso))
+            <?php 
+              switch ($aviso->estado) {
+                case 'azul':
+                  $bootStrapClass = 'primary';
+                  break;
+                case 'verde':
+                  $bootStrapClass = 'success';
+                  break;
+                case 'amarelo':
+                  $bootStrapClass = 'warning';
+                  break;
+                case 'vermelho':
+                  $bootStrapClass = 'danger';
+                  break;
+              }    
+            ?>
+            @forelse  ($aviso->avisosenviados->where('tipodeaviso', 0) as $avisoenviado)            
+              <span class="label label-{{ $bootStrapClass }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
+            @empty
+            @endforelse
+          @endif
+
         
         @endforeach
 
 
       </td>
       <td>
-        <a href="/avisos/create" class="btn btn-sm btn-default"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Enviar SMS</a>
-        <a class="btn btn-sm btn-default" href="{{ url('titulos/'.$titulo->id) }}"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> mais detalhes </a>
+      <!-- <a href="/avisos/create" class="btn btn-sm btn-default"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Enviar SMS</a> -->
+      <a class="btn btn-sm btn-default" href="{{ url('titulos/'.$titulo->id) }}"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> mais detalhes </a>
+
       </td>
     </tr>
     @endforeach

@@ -57,7 +57,7 @@ class TitulosController extends Controller
         }
 
         $titulos = Titulo::with(['avisos' => function ($query) {
-            $query->where('status', 1);
+            $query->where('status','>=',1);
         }])->get();
 
         return view('titulos.index', compact('titulos'));
@@ -200,7 +200,7 @@ class TitulosController extends Controller
 
     public function importa(TituloCreateRequest $request, string $estado)
     {
-        $importacao = Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado]);
+        $importacao = Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado, 'empresa_id' => $request->escola]);
         $importacao_id = $importacao->id;
         $empresa_id = $request->escola;
 
@@ -237,7 +237,7 @@ class TitulosController extends Controller
                 $escola = Empresa::find($empresa_id)->nome;
                 $this->avisoRepository->create(
                     [
-                        'titulo'     => $escola,
+                        'tituloaviso' => $escola,
                         'texto'      => 'Sua fatura vence em: '.$vencimento.'',
                         'user_id'    => Auth::id(),
                         'cliente_id' => $cliente_id,
