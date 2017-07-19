@@ -53,11 +53,13 @@ class EsqueletoSeeder extends Seeder
             $escola->display_name = 'Instituição de ensino';
             $escola->description = 'Usuário autorizado a visualizar os dados referentes à sua escola';
             $escola->save();
+
             $admin = new App\Role();
             $admin->name = 'admin';
             $admin->display_name = 'Admin do sistema';
             $admin->description = 'Usuário autorizado a excluir, editar e incluir alunos, escolas e novos usuários';
             $admin->save();
+            
             $aluno = new App\Role();
             $aluno->name = 'aluno';
             $aluno->display_name = 'Usuário Aluno';

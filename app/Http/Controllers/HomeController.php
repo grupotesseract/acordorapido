@@ -51,7 +51,7 @@ class HomeController extends Controller
             }
             $titulos = Titulo::where('empresa_id', $empresa->id);
             $avisos = Aviso::where('empresa_id', $empresa->id);
-            $importacoes = Importacao::allwhere('empresa_id', $empresa->id);
+            $importacoes = Importacao::where('empresa_id', $empresa->id);
 
         }
         if ($u->hasRole('admin')) {

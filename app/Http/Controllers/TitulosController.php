@@ -198,6 +198,15 @@ class TitulosController extends Controller
         return view('importacao')->with(['estado'=> $estado, 'escolas' => $escolas]);
     }
 
+    public function titulos($id_importacao)
+    {
+        $titulos = Titulo::where('importacao_id', $id_importacao)->get();
+        $importacao = Importacao::where('id', $id_importacao)->first();
+        $escola = $importacao->empresa;
+
+        return view('importacoes.titulos')->with(['escola'=> $escola, 'titulos'=> $titulos, 'importacao'=> $importacao]);
+    }
+
     public function importa(TituloCreateRequest $request, string $estado)
     {
         $importacao = Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado, 'empresa_id' => $request->escola]);

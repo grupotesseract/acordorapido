@@ -32,6 +32,7 @@ Route::resource('avisomodelos', ModeloAvisosController::class);
 
 Route::get('avisospendentes', 'AvisosController@pendentes');
 
+Route::get('importacao/{id}/titulos', 'TitulosController@titulos');
 Route::get('importacao/{estado}', 'TitulosController@importacao');
 Route::post('importa/{estado}', 'TitulosController@importa');
 

@@ -1,180 +1,229 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-	{{ trans('adminlte_lang::message.home') }}
+        {{ trans('adminlte_lang::message.home') }}
 @endsection
 
 
 @section('main-content')
-	<div class="container-fluid spark-screen">
+        <div class="container-fluid spark-screen">
 
-		<!-- Main content -->
-		<section class="content">
-			<div class="row">
-			<!-- MÓDULOS -->
-				<div class="col-md-5">
-					<!-- AREA CHART -->
-					<div class="box box-default">
-						<div class="box-header with-border">
-							<h3 class="box-title">Títulos ativos</h3>
+                <!-- Main content -->
+                <section class="content">
+                        <div class="row">
+                        <!-- MÓDULOS -->
+                                <div class="col-md-5">
+                                        <!-- AREA CHART -->
+                                        <div class="box box-default">
+                                                <div class="box-header with-border">
+                                                        <h3 class="box-title">Títulos ativos</h3>
 
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-							</div>
-						</div>
-						<div class="box-body">
-							<div class="chart">
-								<canvas id="titulosAtivos" style="height:350px"></canvas>
-							</div>
-						</div>
-						<!-- /.box-body -->
-					</div>
-					<!-- /.box -->
+                                                        <div class="box-tools pull-right">
+                                                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                                        </div>
+                                                </div>
+                                                <div class="box-body">
+                                                        <div class="chart">
+                                                                <canvas id="titulosAtivos" style="height:350px"></canvas>
+                                                        </div>
+                                                </div>
+                                                <!-- /.box-body -->
+                                        </div>
+                                        <!-- /.box -->
 
-				</div>
-				<!-- /.col (LEFT) -->
-				<div class="col-md-7">
-					<!-- LINE CHART -->
-					<div class="box box-info">
-						<div class="box-header with-border">
-							<h3 class="box-title">Últimas Importações</h3>
+                                </div>
+                                <!-- /.col (LEFT) -->
+                                <div class="col-md-7">
+                                    <!-- LINE CHART -->
+                                    <div class="box box-info">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Últimas Importações</h3>
 
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-							</div>
-						</div>
-						<div class="box-body">
-							<table class="table table-striped table-hovered">
-								<thead>
-									<tr>
-										<th>Data</th>
-										<th>Módulo</th>
-										<th>Escola</th>
-										
-									</tr>
-								</thead>
-								<tbody>
-									@forelse($importacoes as $importacao)
-									<tr>
-										<td>{{ $importacao->created_at }}</td>
-										<td>{{ $importacao->modulo }}</td>
-										<td>{{ $importacao->empresa->nome }}</td>
-										</tr>
-									@empty
-									@endforelse
-								</tbody>
-							</table>
-						</div>
-						<!-- /.box-body -->
-					</div>
-					<!-- /.box -->
-				</div>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <table class="table table-striped table-hovered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Data</th>
+                                                        <th>Módulo</th>
+                                                        <th>Escola</th>
+                                                        <th>Títulos</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @forelse($importacoes as $importacao)
+                                                    <tr>
+                                                        <td>{{ $importacao->created_at }}</td>
+                                                        <td>{{ $importacao->modulo }}</td>
+                                                        <td>{{ $importacao->empresa->nome }}</td>
+                                                        <td><a href="{{ url('importacao/'.$importacao->id.'/titulos') }}">Títulos</a></td>
+                                                    </tr>
+                                                    @empty
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                        <!-- /.box -->
+                                </div>
 
-				<div class="col-sm-12">
+                                <div class="col-sm-12">
 
-					<div class="box box-success">
-						<div class="box-header with-border">
-							<h3 class="box-title">Ultimos Títulos Importados</h3>
+                                        <div class="box box-success">
+                                                <div class="box-header with-border">
+                                                        <h3 class="box-title">Ultimos Títulos Importados</h3>
 
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-							</div>
-						</div>
-						<div class="box-body">
-							<table class="table table-striped table-hovered">
-								<thead>
-									<tr>
-										<th>Módulo</th>
-										<th>Número</th>
-										<th>Cliente</th>
-										<th>Vencimento</th>
-										<th>Valor</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									@foreach ($titulos as $titulo)
-									<tr>
-										<td>@if($titulo->estado == "azul")
-											<span class="label label-primary"> 
-												@elseif($titulo->estado == "verde")
-												<span class="label label-success"> 
-													@endif
-													{{ $titulo->estado }}
-												</span>
-										</td>
-										<td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
-										<td> {{ $titulo->cliente->nome }}</td>
-										<td> {{ $titulo->vencimento }}</td>
-										<td> {{ $titulo->valor }}</td>
-										<td><a href="{{ url('titulo/'.$titulo->id) }}">ver mais...</a></td>
-									</tr>
-									@endforeach
-								</tbody>
-							</table>
-						</div>
-						<!-- /.box-body -->
-					</div>
-				</div>
-				<!-- /.col (RIGHT) -->
-			</div>
-			<!-- /.row -->
+                                                        <div class="box-tools pull-right">
+                                                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                                        </div>
+                                                </div>
+                                                <div class="box-body">
+                                                        <table class="table table-striped table-hovered">
+                                                                <thead>
+    <tr>
+      <th>Módulo</th>
+      <th>Número</th>
+      <th>Cliente</th>
+      <th>Vencimento</th>
+      <th>Valor</th>
+      <th>Importado em</th>
+      <th>Ações Tomadas</th>
+      <th></th>
+    </tr>
+                                                                </thead>
+                                                                <tbody>
+    @foreach ($titulos as $titulo)
+    <tr>
+            <?php 
+              switch ($titulo->estado) {
+                case 'azul':
+                  $bootStrapClass = 'primary';
+                  break;
+                case 'verde':
+                  $bootStrapClass = 'success';
+                  break;
+                case 'amarelo':
+                  $bootStrapClass = 'warning';
+                  break;
+                case 'vermelho':
+                  $bootStrapClass = 'danger';
+                  break;
+              }    
+            ?>
+      <td> <span class="label label-{{ $bootStrapClass }}">{{ ucfirst($titulo->estado) }}</span></td>
+      <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
+      <td> {{ $titulo->cliente->nome }}</td>
+      <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
 
-		</section>
+      <td> {{ $titulo->valor }}</td>
+      <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
+      <td>  
 
-		
-	</div>
+        @foreach ($titulo->avisos as $aviso)
+          @if (isset($aviso))
+            <?php 
+              switch ($aviso->estado) {
+                case 'azul':
+                  $bootStrapClass = 'primary';
+                  break;
+                case 'verde':
+                  $bootStrapClass = 'success';
+                  break;
+                case 'amarelo':
+                  $bootStrapClass = 'warning';
+                  break;
+                case 'vermelho':
+                  $bootStrapClass = 'danger';
+                  break;
+              }    
+            ?>
+            @forelse  ($aviso->avisosenviados->where('tipodeaviso', 0) as $avisoenviado)            
+              <span class="label label-{{ $bootStrapClass }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
+            @empty
+            @endforelse
+          @endif
+
+        
+        @endforeach
+
+
+      </td>
+      <td>
+      <!-- <a href="/avisos/create" class="btn btn-sm btn-default"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Enviar SMS</a> -->
+      <a class="btn btn-sm btn-default" href="{{ url('titulos/'.$titulo->id) }}"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> mais detalhes </a>
+
+      </td>
+    </tr>
+    @endforeach
+                                                                </tbody>
+                                                        </table>
+                                                </div>
+                                                <!-- /.box-body -->
+                                        </div>
+                                </div>
+                                <!-- /.col (RIGHT) -->
+                        </div>
+                        <!-- /.row -->
+
+                </section>
+
+
+        </div>
 
 
 <script>
-  $(function () {
+$(function () {
     var titulosAtivosCanvas = $("#titulosAtivos").get(0).getContext("2d");
     var titulosAtivos = new Chart(titulosAtivosCanvas,
     {
-    	type: 'doughnut',
-        data: {
+        type: 'doughnut',
+            data: {
             datasets: [{
-                data: [
-                    34,
-                    23,
-                    15,
-                    40,
-                ],
-                backgroundColor: [
-                	'#5CB85C',
-                	'#F0BD4E',
-                	'#D9534F',
-                	'#0275D8',
-                ],
-                label: 'Títulos ativos'
-            }],
-            labels: [
-                "Verde",
-                "Amarelo",
-                "Vermelho",
-                "Azul",
-            ]
-        },
+            data: [
+                34,
+                23,
+                15,
+                40,
+            ],
+            backgroundColor: [
+                '#5CB85C',
+                '#F0BD4E',
+                '#D9534F',
+                '#0275D8',
+            ],
+            label: 'Títulos ativos'
+    }],
+        labels: [
+            "Verde",
+            "Amarelo",
+            "Vermelho",
+            "Azul",
+        ]
+    },
         options: {
-            responsive: true,
+        responsive: true,
             legend: {
-                position: 'right',
-            },
-            title: {
-                display: false,
-                text: 'Títulos ativos'
-            },
-            animation: {
-                animateScale: true,
-                animateRotate: true
-            }
-        }
+            position: 'right',
+    },
+        title: {
+        display: false,
+            text: 'Títulos ativos'
+    },
+        animation: {
+        animateScale: true,
+            animateRotate: true
+    }
+    }
     });
 
 });
