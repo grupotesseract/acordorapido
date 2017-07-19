@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AvisoCreateRequest;
+
 use App\Http\Requests\AvisoUpdateRequest;
 use App\Repositories\AvisoRepository;
 use App\Validators\AvisoValidator;
@@ -208,20 +209,23 @@ class AvisosController extends Controller
     {
         $aviso = $this->repository->find($aviso_id);
 
-        $this->repository->enviarAviso([
+        $retorno = $this->repository->enviarAviso([
             'to'     => $aviso->cliente->celular,
             'titulo' => $aviso->tituloaviso,
             'texto'  => $aviso->texto,
             'id'     => $aviso->cliente->id,
         ]);
 
-        $aviso->status = $aviso->status + 1;
+        if ($retorno == '200') {
+            $aviso->status = $aviso->status + 1;
+        }
+
         $avisoenviado = new AvisoEnviado;
         $avisoenviado->user_id = Auth::id();
         $avisoenviado->aviso_id = $aviso->id;
         $avisoenviado->estado = $aviso->estado;
         $avisoenviado->tipodeaviso = 0; //SMS
-        $avisoenviado->status = 1; //Terá código de retorno da API    
+        $avisoenviado->status = $retorno; //Terá código de retorno da API    
 
         $avisoenviado->save();
         $aviso->save();
@@ -233,9 +237,43 @@ class AvisosController extends Controller
     {
         $aviso = $this->repository->create($request->all());
 
-        $this->repository->enviarAviso($request);
+        $retorno = $this->repository->enviarAviso($request);
 
         //TRATAR RETORNO
-        return redirect()->back()->with('message', 'SMS enviado com sucesso!');
+        if ($retorno = '200') {
+            return redirect()->back()->with('message', 'SMS enviado com sucesso!');
+        }
+        else
+            return redirect()->back()->with('message', 'Houve algum erro ao enviar o SMS. Código do erro '.$retorno);
+
+    }
+
+    public function enviarLoteAviso(Request $request) 
+    {
+        foreach ($request->aviso as $key => $value) {
+            $aviso = $this->repository->find($value);
+            $retorno = $this->repository->enviarAviso([
+                'to'     => $aviso->cliente->celular,
+                'titulo' => $aviso->tituloaviso,
+                'texto'  => $aviso->texto,
+                'id'     => $aviso->cliente->id,
+            ]);
+
+            if ($retorno == '200') {
+                $aviso->status = $aviso->status + 1;
+            }
+
+            $avisoenviado = new AvisoEnviado;
+            $avisoenviado->user_id = Auth::id();
+            $avisoenviado->aviso_id = $aviso->id;
+            $avisoenviado->estado = $aviso->estado;
+            $avisoenviado->tipodeaviso = 0; //SMS
+            $avisoenviado->status = $retorno; //Terá código de retorno da API    
+
+            $avisoenviado->save();
+            $aviso->save();            
+        }
+
+        return redirect()->back()->with('message', 'Avisos enviados com sucesso!');
     }
 }

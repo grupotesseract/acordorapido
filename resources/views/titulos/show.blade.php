@@ -34,7 +34,7 @@
           </span>  
           <span class="col-sm-12"><b>Vencimento:</b> {{ $titulo->vencimento }}</span> 
           <span class="col-sm-12 estado-{{ $titulo->estado }}"></span>
-          <a href="/avisos/create" class="btn btn-default"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Enviar SMS</a>
+          <!-- <a href="/avisos/create" class="btn btn-default"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Enviar SMS</a> -->
         </div>
       </div>
     </div>

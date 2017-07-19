@@ -55,7 +55,7 @@
             </select>
           </div>
              
-          <div class="form-grup">
+          <div class="form-group">
 
             {!! Form::file('excel', ['required', 'class' => 'form-file']) !!}
                           

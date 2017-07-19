@@ -35,14 +35,14 @@
       <th>Vencimento</th>
       <th>Valor</th>
       <th>Importado em</th>
-      <th>Ações</th>
+      <th>Ações Tomadas</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
     @foreach ($titulos as $titulo)
     <tr>
-      <td>{{ $titulo->estado }}</td>
+      <td>{{ ucfirst($titulo->estado) }}</td>
       <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
       <td> {{ $titulo->cliente->nome }}</td>
       <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
