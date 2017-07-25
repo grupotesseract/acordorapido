@@ -13,7 +13,7 @@
 {!! Form::open(array('url'=>'envialote/','method'=>'POST','name'=>'avisoform')) !!}
 
 
-{!! Form::submit('Enviar Avisos Marcados', array('class'=>'btn btn-primary btn-md')) !!}
+{!! Form::submit('Enviar SMS Marcados', array('class'=>'btn btn-primary btn-md')) !!}
 <a href="#" class="btn btn-default">Filtro</a></td>
 
 <a href="#" name="marcartodos" class="btn btn-default">Marcar Todos</a></td>
@@ -52,6 +52,7 @@
 
 {!! Form::close() !!}
 
+<<<<<<< HEAD
 
 
 <!-- Modal -->
@@ -97,3 +98,6 @@
 
 
 @endsection
+=======
+@endsection
+>>>>>>> 2b42dab9ec1dd95029fe2cfb241466f239d7f914
