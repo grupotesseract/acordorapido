@@ -61,9 +61,9 @@
                                                     @forelse($importacoes as $importacao)
                                                     <tr>
                                                         <td>{{ $importacao->created_at }}</td>
-                                                        <td>{{ $importacao->modulo }}</td>
+                                                        <td><span class="label label-{{ $importacao->modulo }}">{{ ucfirst($importacao->modulo) }}</span></td>
                                                         <td>{{ $importacao->empresa->nome }}</td>
-                                                        <td><a href="{{ url('importacao/'.$importacao->id.'/titulos') }}">Títulos</a></td>
+                                                        <td><a href="{{ url('importacao/'.$importacao->id.'/titulos') }}">{{ $importacao->titulos->count() }} Títulos</a></td>
                                                     </tr>
                                                     @empty
                                                     @endforelse
@@ -120,7 +120,7 @@
                   break;
               }    
             ?>
-      <td> <span class="label label-{{ $bootStrapClass }}">{{ ucfirst($titulo->estado) }}</span></td>
+      <td> <span class="label label-{{ $titulo->estado }}">{{ ucfirst($titulo->estado) }}</span></td>
       <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
       <td> {{ $titulo->cliente->nome }}</td>
       <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>

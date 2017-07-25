@@ -1,6 +1,18 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
 
+.label-azul {
+    color: #fff !important;
+    background-color: #3c8dbc !important;
+}
+.label-verde {
+    color: #fff !important;
+    background-color: #00a65a !important;
+}
+.label-amarelo {
+}
+.label-vermelho {
+}
 
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)

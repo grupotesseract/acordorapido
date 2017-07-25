@@ -42,7 +42,7 @@
   <tbody>
     @foreach ($titulos as $titulo)
     <tr>
-      <td>{{ ucfirst($titulo->estado) }}</td>
+      <td> <span class="label label-{{ $titulo->estado }}">{{ ucfirst($titulo->estado) }}</span></td>
       <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
       <td> {{ $titulo->cliente->nome }}</td>
       <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>

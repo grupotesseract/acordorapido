@@ -109,6 +109,7 @@ class TitulosController extends Controller
     public function show($id)
     {
         $titulo = $this->repository->find($id);
+        $avisos = $titulo->avisos;
 
         if (request()->wantsJson()) {
             return response()->json([
@@ -116,7 +117,7 @@ class TitulosController extends Controller
             ]);
         }
 
-        return view('titulos.show', compact('titulo'));
+        return view('titulos.show', compact('titulo','avisos'));
     }
 
     /**

@@ -21,7 +21,7 @@
   <tbody>
     @foreach ($titulos as $titulo)
     <tr>
-      <td>{{ ucfirst($titulo->estado) }}</td>
+      <td> <span class="label label-{{ $titulo->estado }}">{{ ucfirst($titulo->estado) }}</span></td>
       <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
       <td> {{ $titulo->cliente->nome }}</td>
       <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
@@ -32,24 +32,8 @@
 
         @foreach ($titulo->avisos as $aviso)
           @if (isset($aviso))
-            <?php 
-              switch ($aviso->estado) {
-                case 'azul':
-                  $bootStrapClass = 'primary';
-                  break;
-                case 'verde':
-                  $bootStrapClass = 'success';
-                  break;
-                case 'amarelo':
-                  $bootStrapClass = 'warning';
-                  break;
-                case 'vermelho':
-                  $bootStrapClass = 'danger';
-                  break;
-              }    
-            ?>
             @forelse  ($aviso->avisosenviados->where('tipodeaviso', 0) as $avisoenviado)            
-              <span class="label label-{{ $bootStrapClass }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
+              <span class="label label-{{ $aviso->estado }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
             @empty
             @endforelse
           @endif
