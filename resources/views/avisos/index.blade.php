@@ -52,7 +52,6 @@
 
 {!! Form::close() !!}
 
-<<<<<<< HEAD
 
 
 <!-- Modal -->
