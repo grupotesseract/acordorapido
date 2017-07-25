@@ -31,6 +31,25 @@
         @endphp
     </script>
 
+    <script>
+    
+        $(document).ready(function(){
+           $(".enviarligacao").click(function(){ // Click to only happen on announce links
+            console.log('oi');
+            
+             $("#aviso_id").val($(this).data('id'));
+             $('#ligacao').modal('show');
+           });
+        });
+
+        /*function CheckAll(chk)
+        {
+        for (i = 0; i < chk.length; i++)
+            chk[i].checked = true ;
+        }*/   
+
+    </script>
+
     <style>
         .label .glyphicon {
           top: 3px;
