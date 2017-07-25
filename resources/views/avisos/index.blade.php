@@ -71,6 +71,9 @@
       <div class="modal-body">
         <p>Atenção: não se esqueça de iniciar e pausar o cronômetro para marcar a duração da ligação telefônica</p>
         <div class="input-group">
+        	@include ('cronometro')
+        </div>
+        <div class="input-group">
 			<span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-pencil"></i></span>
 			<textarea placeholder="Observações" class="form-control" name="texto" id="texto" rows="3"></textarea>
 		</div>   
