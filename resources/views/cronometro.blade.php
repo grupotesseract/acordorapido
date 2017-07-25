@@ -20,17 +20,6 @@
           <a  id="btn_lap" type="button" class="btn btn-default">
             <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
           </a>
-        </div>
-     
-        <br>
-        <div class="well well_laps">
-          Vueltas:
-          <div class="pull-right">
-            <a href="javascript:" id="btn_clear"><span class="glyphicon glyphicon-trash"></span> Clear</a>
-          </div>
-          <hr>
-          <div id="log" class="log">
-            <ul class="list-group"></ul>
-          </div>
-        </div>
+        </div>     
+        
 @endsection
