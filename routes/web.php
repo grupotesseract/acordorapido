@@ -39,6 +39,8 @@ Route::post('importa/{estado}', 'TitulosController@importa');
 Route::post('sms', 'AvisosController@enviarAviso');
 Route::post('envialote', 'AvisosController@enviarLoteAviso');
 
-Route::get('avisos/sms/{aviso_id}', 'AvisosController@pegaAviso');
+Route::get('avisos/sms/{aviso_id}', 'AvisosController@enviaSMS');
+Route::post('avisos/ligacao/', 'AvisosController@salvaLigacao');
+
 
 

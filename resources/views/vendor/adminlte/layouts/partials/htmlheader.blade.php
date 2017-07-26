@@ -129,7 +129,7 @@
 
             $("#btn_lap").click(function(){
               vueltas++;
-              consola('<li class="list-group-item"><small>'+vueltas+'</small>     '+hor.innerHTML+":"+min.innerHTML+":"+seg.innerHTML+'</li>');
+              consola('<li class="list-group-item"><small>'+vueltas+'</small>     '+hor.innerHTML+":"+min.innerHTML+":"+seg.innerHTML+'</li><input type="hidden" name="tempoligacao" value="'+hor.innerHTML+":"+min.innerHTML+":"+seg.innerHTML+'" />');
             });
 
             function consola(msg){

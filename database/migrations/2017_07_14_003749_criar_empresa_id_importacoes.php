@@ -14,7 +14,7 @@ class CriarEmpresaIdImportacoes extends Migration
     public function up()
     {
         Schema::table('importacoes', function (Blueprint $table) {
-            $table->integer('empresa_id')->unsigned();
+            $table->integer('empresa_id')->unsigned()->nullable();
             $table->foreign('empresa_id')->references('id')->on('empresas');
         });
     }

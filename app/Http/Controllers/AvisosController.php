@@ -10,6 +10,9 @@ use App\Validators\AvisoValidator;
 
 use App\Entities\AvisoEnviado as AvisoEnviado;
 
+use App\Repositories\AvisoEnviadoRepository;
+
+
 use Auth;
 use Illuminate\Http\Request;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -27,10 +30,12 @@ class AvisosController extends Controller
      */
     protected $validator;
 
-    public function __construct(AvisoRepository $repository, AvisoValidator $validator)
+    public function __construct(AvisoRepository $repository, AvisoValidator $validator, AvisoEnviadoRepository $avisoenviadorepository)
     {
         $this->middleware('auth');
         $this->repository = $repository;
+        $this->avisoenviadorepository = $avisoenviadorepository;
+
         $this->validator = $validator;
     }
 
@@ -205,7 +210,24 @@ class AvisosController extends Controller
         return redirect()->back()->with('message', 'Aviso deleted.');
     }
 
-    public function pegaAviso($aviso_id)
+    public function salvaLigacao(Request $request) {
+        $aviso = $this->repository->find($request->aviso_id);
+
+        $this->avisoenviadorepository->create([
+                'user_id' => Auth::id(),
+                'aviso_id' => $aviso->id,
+                'estado' => $aviso->estado,
+                'tipodeaviso' => 0,
+                'status' => '1',
+                'observacaoligacao' => $request->observacaoligacao,
+                'tempoligacao' => $request->tempoligacao
+            ]);        
+
+        return redirect()->back();
+
+    }
+
+    public function enviaSMS($aviso_id)
     {
         $aviso = $this->repository->find($aviso_id);
 
