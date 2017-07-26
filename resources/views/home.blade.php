@@ -187,10 +187,10 @@ $(function () {
         data: {
             datasets: [{
                 data: [
-                    34,
-                    23,
-                    15,
-                    40,
+                    {{ $totalVerdes }},
+                    {{ $totalAmarelos }},
+                    {{ $totalVermelhos }},
+                    {{ $totalAzuis }},
                 ],
                 backgroundColor: [
                     '#5CB85C',

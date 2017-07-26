@@ -201,7 +201,7 @@ class TitulosController extends Controller
 
     public function showModulo($estado)
     {
-        $titulos = Titulo::porEstado($estado);
+        $titulos = Titulo::porEstado($estado)->get();
 
         return view('modulos.show')->with(compact('titulos'));
     }
