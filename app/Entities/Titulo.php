@@ -58,6 +58,14 @@ class Titulo extends Model
      */
 
     /**
+     * scope por estado
+     */
+    public function scopePorEstado($query, $valor)
+    {
+        return $query->where('estado', $valor);
+    }
+
+    /**
      * scopePagos - Scope para facilitar a query pelos Titulos pagos
      *
      * @param mixed $query
