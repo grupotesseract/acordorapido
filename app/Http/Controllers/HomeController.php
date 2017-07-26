@@ -61,7 +61,20 @@ class HomeController extends Controller
 
         }
 
+        //Pegando totais pelas Scopes
+        $totalAzuis = Titulo::azuis()->count();
+        $totalVerdes = Titulo::verdes()->count();
+        $totalAmarelos = Titulo::amarelos()->count();
+        $totalVermelhos = Titulo::vermelhos()->count();
 
-        return view('home')->with(['avisos' => $avisos, 'titulos' => $titulos, 'importacoes' => $importacoes]);
+        return view('home')->with([
+            'avisos' => $avisos, 
+            'titulos' => $titulos, 
+            'importacoes' => $importacoes,
+            'totalAzuis' => $totalAzuis,
+            'totalVerdes' => $totalVerdes,
+            'totalAmarelos' => $totalAmarelos,
+            'totalVermelhos' => $totalVermelhos
+        ]);
     }
 }
