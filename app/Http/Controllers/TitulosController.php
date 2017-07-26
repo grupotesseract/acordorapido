@@ -225,6 +225,7 @@ class TitulosController extends Controller
             $avisos = Aviso::query();
         }
 
+        $avisos = $avisos->where('estado',$estado);
         $totalAvisos = $avisos->count();
 
         $totalSMSs = $avisos->get()->each(function ($aviso) { 
