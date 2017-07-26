@@ -43,7 +43,7 @@
       <h4>Escolha abaixo a planilha a ser importada</h4>
       
         {!! Form::open(array('url'=>'importa/'.$estado,'method'=>'POST', 'files'=>true)) !!}
-          <div class="form-grup ">        
+          <div class="form-group ">        
             
             <label for="sel1">Escolha a escola:</label>
             <select class="form-control" name="escola" id="escola">
