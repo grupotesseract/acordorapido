@@ -34,6 +34,9 @@ class Titulo extends Model
         return $this->belongsTo('App\Empresa');
     }
 
+    /**
+     * Um titulo tem varios avisos 
+     */
     public function avisos()
     {
         return $this->hasMany('App\Aviso');
