@@ -217,11 +217,14 @@ class AvisosController extends Controller
                 'user_id' => Auth::id(),
                 'aviso_id' => $aviso->id,
                 'estado' => $aviso->estado,
-                'tipodeaviso' => 0,
+                'tipodeaviso' => 1,
                 'status' => '1',
                 'observacaoligacao' => $request->observacaoligacao,
-                'tempoligacao' => $request->tempoligacao
-            ]);        
+                'tempoligacao' => $request->tempoligacao[0]
+            ]);      
+
+        $aviso->status = $aviso->status + 1;
+        $aviso->save();
 
         return redirect()->back();
 
