@@ -61,7 +61,7 @@
                                     @forelse($importacoes as $importacao)
                                     <tr>
                                         <td>{{ $importacao->created_at }}</td>
-                                        <td><span class="label label-{{ $importacao->modulo }}">{{ ucfirst($importacao->modulo) }}</span></td>
+                                        <td><a href="{{ url('titulos/modulo/'.$importacao->modulo)}}" class="label label-{{ $importacao->modulo }}">{{ ucfirst($importacao->modulo) }}</a></td>
                                         <td>{{ $importacao->empresa->nome }}</td>
                                         <td><a href="{{ url('importacao/'.$importacao->id.'/titulos') }}">{{ $importacao->titulos->count() }} Títulos</a></td>
                                     </tr>
@@ -104,23 +104,7 @@
                                             <tbody>
 @foreach ($titulos as $titulo)
 <tr>
-<?php 
-switch ($titulo->estado) {
-case 'azul':
-$bootStrapClass = 'primary';
-break;
-case 'verde':
-$bootStrapClass = 'success';
-break;
-case 'amarelo':
-$bootStrapClass = 'warning';
-break;
-case 'vermelho':
-$bootStrapClass = 'danger';
-break;
-}    
-?>
-<td> <span class="label label-{{ $titulo->estado }}">{{ ucfirst($titulo->estado) }}</span></td>
+<td><a href="{{ url('titulos/modulo/'.$titulo->estado)}}" class="label label-{{ $titulo->estado }}">{{ ucfirst($titulo->estado) }}</a></td>
 <td>{{ ucwords(strtolower($titulo->titulo)) }}</td>
 <td> {{ $titulo->cliente->nome }}</td>
 <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
@@ -134,17 +118,17 @@ break;
 <?php 
 switch ($aviso->estado) {
 case 'azul':
-$bootStrapClass = 'primary';
-break;
+    $bootStrapClass = 'primary';
+    break;
 case 'verde':
-$bootStrapClass = 'success';
-break;
+    $bootStrapClass = 'success';
+    break;
 case 'amarelo':
-$bootStrapClass = 'warning';
-break;
+    $bootStrapClass = 'warning';
+    break;
 case 'vermelho':
-$bootStrapClass = 'danger';
-break;
+    $bootStrapClass = 'danger';
+    break;
 }    
 ?>
 @forelse  ($aviso->avisosenviados->where('tipodeaviso', 0) as $avisoenviado)            
@@ -187,10 +171,10 @@ $(function () {
         data: {
             datasets: [{
                 data: [
-                    34,
-                    23,
-                    15,
-                    40,
+                    {{ $totalVerdes }},
+                    {{ $totalAmarelos }},
+                    {{ $totalVermelhos }},
+                    {{ $totalAzuis }},
                 ],
                 backgroundColor: [
                     '#5CB85C',

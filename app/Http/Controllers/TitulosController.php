@@ -203,6 +203,7 @@ class TitulosController extends Controller
     public function showModulo($estado)
     {
         $u = Auth::user();
+        $titulos = Titulo::porEstado($estado)->get();
 
         if ($u->hasRole('aluno')) {
             $cliente = $u->cliente;
@@ -235,6 +236,7 @@ class TitulosController extends Controller
         })->pluck('totalLigacoes')->sum();
 
         return view('modulos.show')->with([
+            'titulos' => $titulos,
             'totalAvisos' => $totalAvisos,
             'totalSMSs' => $totalSMSs,
             'totalLigacoes' => $totalLigacoes,
