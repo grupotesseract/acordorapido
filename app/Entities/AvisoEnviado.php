@@ -19,4 +19,33 @@ class AvisoEnviado extends Model implements Transformable
         return $this->belongsTo('App\Aviso');
     }
 
+    /**
+     * scope por estado
+     */
+    public function scopePorEstado($query, $valor)
+    {
+        return $query->where('estado', $valor);
+    }
+    
+    /**
+     * Scope para pegar os de tipodeaviso SMS (0)
+     *
+     * @param mixed $query
+     */
+    public function scopeSmss($query)
+    {
+        return $query->where('tipodeaviso', 0);
+    }
+
+    /**
+     * Scope para pegar os de tipodeaviso Ligacao telefonica (1)
+     *
+     * @param mixed $query
+     */
+    public function scopeLigacoes($query)
+    {
+        return $query->where('tipodeaviso', 1);
+    }
+    
+
 }

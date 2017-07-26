@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Aviso;
 use App\Cliente as Cliente;
 use App\Empresa as Empresa;
 use App\Http\Requests\TituloCreateRequest;
@@ -201,9 +202,45 @@ class TitulosController extends Controller
 
     public function showModulo($estado)
     {
+        $u = Auth::user();
         $titulos = Titulo::porEstado($estado)->get();
 
-        return view('modulos.show')->with(compact('titulos'));
+        if ($u->hasRole('aluno')) {
+            $cliente = $u->cliente;
+            if (!$cliente) {
+                dd('aluno não encontrado');
+            }
+            $avisos = Aviso::where('cliente_id', $cliente->id);
+        }
+
+        if ($u->hasRole('escola')) {
+            $empresa = $u->empresa;
+            if (!$empresa) {
+                dd('empresa não encontrado');
+            }
+            $avisos = Aviso::where('cliente_id', $cliente->id);
+        }
+
+        if ($u->hasRole('admin')) {
+            $avisos = Aviso::query();
+        }
+
+        $totalAvisos = $avisos->count();
+
+        $totalSMSs = $avisos->get()->each(function ($aviso) { 
+            $aviso->totalSMS = $aviso->avisosenviados()->smss()->count(); 
+        })->pluck('totalSMS')->sum();
+
+        $totalLigacoes = $avisos->get()->each(function ($aviso) { 
+            $aviso->totalLigacoes = $aviso->avisosenviados()->ligacoes()->count(); 
+        })->pluck('totalLigacoes')->sum();
+
+        return view('modulos.show')->with([
+            'titulos' => $titulos,
+            'totalAvisos' => $totalAvisos,
+            'totalSMSs' => $totalSMSs,
+            'totalLigacoes' => $totalLigacoes,
+        ]);
     }
 
     public function titulos($id_importacao)
