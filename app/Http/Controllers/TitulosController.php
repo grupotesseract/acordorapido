@@ -199,6 +199,13 @@ class TitulosController extends Controller
         return view('importacao')->with(['estado'=> $estado, 'escolas' => $escolas]);
     }
 
+    public function showModulo($estado)
+    {
+        $titulos = Titulo::porEstado($estado);
+
+        return view('modulos.show')->with(compact('titulos'));
+    }
+
     public function titulos($id_importacao)
     {
         $titulos = Titulo::where('importacao_id', $id_importacao)->get();
