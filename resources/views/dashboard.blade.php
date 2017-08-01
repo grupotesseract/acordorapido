@@ -12,8 +12,8 @@
         <section class="content">
             <div class="row">
             <!-- MÓDULOS -->
-                @role('escola')
                <div class="col-md-5">
+                    <!-- AREA CHART -->
                     <div class="box box-default">
                         <div class="box-header with-border">
                             <h3 class="box-title">Títulos ativos</h3>
@@ -31,11 +31,12 @@
                             </div>
                             <!-- /.box-body -->
                     </div>
-                </div>
-                @endrole
+                        <!-- /.box -->
 
-                @role('escola')
+                </div>
+                <!-- /.col (LEFT) -->
                 <div class="col-md-7">
+                    <!-- LINE CHART -->
                     <div class="box box-info">
                         <div class="box-header with-border">
                             <h3 class="box-title">Últimas Importações</h3>
@@ -71,11 +72,11 @@
                         </div>
                         <!-- /.box-body -->
                     </div>
+                        <!-- /.box -->
                 </div>
-                @endrole
 
-                @role('escola')
                 <div class="col-sm-12">
+
                     <div class="box box-success">
                         <div class="box-header with-border">
                             <h3 class="box-title">Ultimos Títulos Importados</h3>
@@ -89,16 +90,16 @@
                             <div class="box-body">
                                     <table class="table table-striped table-hovered">
                                             <thead>
-                                                <tr>
-                                                    <th>Módulo</th>
-                                                    <th>Número</th>
-                                                    <th>Cliente</th>
-                                                    <th>Vencimento</th>
-                                                    <th>Valor</th>
-                                                    <th>Importado em</th>
-                                                    <th>Ações Tomadas</th>
-                                                    <th></th>
-                                                </tr>
+<tr>
+<th>Módulo</th>
+<th>Número</th>
+<th>Cliente</th>
+<th>Vencimento</th>
+<th>Valor</th>
+<th>Importado em</th>
+<th>Ações Tomadas</th>
+<th></th>
+</tr>
                                             </thead>
                                             <tbody>
 @foreach ($titulos as $titulo)
@@ -114,8 +115,24 @@
 
 @foreach ($titulo->avisos as $aviso)
 @if (isset($aviso))
+<?php 
+switch ($aviso->estado) {
+case 'azul':
+    $bootStrapClass = 'primary';
+    break;
+case 'verde':
+    $bootStrapClass = 'success';
+    break;
+case 'amarelo':
+    $bootStrapClass = 'warning';
+    break;
+case 'vermelho':
+    $bootStrapClass = 'danger';
+    break;
+}    
+?>
 @forelse  ($aviso->avisosenviados->where('tipodeaviso', 0) as $avisoenviado)            
-<span class="label label-{{ $aviso->estado }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
+<span class="label label-{{ $bootStrapClass }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
 @empty
 @endforelse
 @endif
@@ -138,8 +155,9 @@
                             <!-- /.box-body -->
                     </div>
                 </div>
-                @endrole
+                    <!-- /.col (RIGHT) -->
             </div>
+                <!-- /.row -->
         </section>
     </div>
 
