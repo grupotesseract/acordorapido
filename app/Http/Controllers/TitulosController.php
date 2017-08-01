@@ -218,7 +218,7 @@ class TitulosController extends Controller
             if (!$empresa) {
                 dd('empresa não encontrado');
             }
-            $avisos = Aviso::where('cliente_id', $cliente->id);
+            $avisos = Aviso::where('cliente_id', $empresa->id);
         }
 
         if ($u->hasRole('admin')) {
