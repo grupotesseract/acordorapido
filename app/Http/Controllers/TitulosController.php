@@ -246,8 +246,9 @@ class TitulosController extends Controller
 
     public function titulos($id_importacao)
     {
-        $titulos = Titulo::where('importacao_id', $id_importacao)->get();
-        $importacao = Importacao::where('id', $id_importacao)->first();
+        //$titulos = Titulo::where('importacao_id', $id_importacao)->get();
+        $importacao = Importacao::find($id_importacao)->first();
+        $titulos = $importacao->titulos->all();
         $escola = $importacao->empresa;
 
         return view('importacoes.titulos')->with(['escola'=> $escola, 'titulos'=> $titulos, 'importacao'=> $importacao]);
@@ -276,20 +277,24 @@ class TitulosController extends Controller
                 $cliente_id = $cliente->id;
 
                 $titulo = Titulo::firstOrNew(['titulo' => $sheet->titulo, 'empresa_id' => $empresa_id]);
-                $titulo->estado = $estado;
                 $titulo->cliente_id = $cliente_id;
                 $titulo->empresa_id = $empresa_id;
                 $titulo->pago = false;
                 $titulo->vencimento = $sheet->vencimento;
                 $titulo->valor = $sheet->valor;
                 $titulo->titulo = $sheet->titulo;
-                $titulo->importacao_id = $importacao_id;
+                $titulo->estado = $estado;
                 $titulo->save();
+
+                //criar registro na tabela pivot
+                $titulo->importacoes()->attach($importacao_id);
 
                 $vencimento = date('d-m-Y', strtotime(str_replace('-', '/', $titulo->vencimento)));
 
                 $user_id = Auth::id();
                 $escola = Empresa::find($empresa_id)->nome;
+                
+                //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA                
                 $this->avisoRepository->create(
                     [
                         'tituloaviso' => $escola,
@@ -305,6 +310,7 @@ class TitulosController extends Controller
             });
         });
 
+        //TODO: aqui vai ser o tratamento da importação dos não-pagantes dentro de um mesmo módulo
         if ($estado == 'verde') {
             $this->repository->atualizaPagantes($empresa_id);
         }
