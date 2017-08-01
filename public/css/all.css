@@ -1,6 +1,23 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
 
+.label-modulo-azul {
+    color: #fff !important;
+    background-color: #3c8dbc !important;
+}
+.label-modulo-verde {
+    color: #fff !important;
+    background-color: #00a65a !important;
+}
+.label-modulo-amarelo {
+    color: #fff !important;
+    background-color: #F0BD4E !important;
+}
+.label-modulo-vermelho {
+    color: #fff !important;
+    background-color: #D9534F !important;
+}
+
 .label-azul {
     color: #fff !important;
     background-color: #3c8dbc !important;
