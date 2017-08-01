@@ -26,6 +26,11 @@ class Titulo extends Model
         return $this->belongsTo('App\Cliente');
     }
 
+    public function importacoes()
+    {
+        return $this->belongsToMany('App\Importacao');
+    }
+
     /**
      * Pega a empresa que gerou o pagamento.
      */

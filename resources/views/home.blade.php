@@ -60,7 +60,8 @@
                                 <tbody>
                                     @forelse($importacoes as $importacao)
                                     <tr>
-                                        <td>{{ $importacao->created_at }}</td>
+
+                                        <td>{{ Carbon\Carbon::parse($importacao->created_at)->format('d/m/Y h:i:s A') }}</td>
                                         <td><a href="{{ url('titulos/modulo/'.$importacao->modulo)}}" class="label label-{{ $importacao->modulo }}">{{ ucfirst($importacao->modulo) }}</a></td>
                                         <td>{{ $importacao->empresa->nome }}</td>
                                         <td><a href="{{ url('importacao/'.$importacao->id.'/titulos') }}">{{ $importacao->titulos->count() }} Títulos</a></td>

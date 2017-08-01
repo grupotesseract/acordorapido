@@ -29,7 +29,7 @@ class Importacao extends Model
      */
     public function titulos()
     {
-        return $this->hasMany('App\Titulo');
+        return $this->belongsToMany('App\Titulo');
     }
 
     public function titulosCount()
