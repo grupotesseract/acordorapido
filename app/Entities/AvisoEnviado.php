@@ -12,7 +12,7 @@ class AvisoEnviado extends Model implements Transformable
 
     protected $table = "avisosenviados";
 
-    protected $fillable = ['user_id', 'aviso_id', 'estado', 'tipodeaviso', 'status'];
+    protected $fillable = ['user_id', 'aviso_id', 'estado', 'tipodeaviso', 'status','observacaoligacao', 'tempoligacao'];
 
     public function aviso()
     {

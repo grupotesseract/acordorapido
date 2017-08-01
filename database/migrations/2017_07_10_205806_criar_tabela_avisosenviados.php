@@ -36,5 +36,7 @@ class CriarTabelaAvisosenviados extends Migration
     public function down()
     {
         Schema::dropIfExists('avisosenviados');
+        Schema::dropIfExists('aviso_enviados');
+
     }
 }

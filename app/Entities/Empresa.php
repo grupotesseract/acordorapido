@@ -10,6 +10,9 @@ class Empresa extends Model
 
     protected $fillable = [
         'nome',
+        'cidade',
+        'estado',
+        'user_id'
     ];
 
     /**

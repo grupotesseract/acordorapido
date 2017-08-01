@@ -1,2 +1,2 @@
-# avisorapido
-`git clone https://github.com/evandrododo/avisorapido.git`
+# acordorapido
+Gerenciamento e visualização de títulos escolares

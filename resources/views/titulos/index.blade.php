@@ -73,6 +73,11 @@
               <span class="label label-{{ $bootStrapClass }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
             @empty
             @endforelse
+            
+            @forelse  ($aviso->avisosenviados->where('tipodeaviso', 1) as $avisoenviado)            
+              <span class="label label-{{ $bootStrapClass }}"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></span>
+            @empty
+            @endforelse
           @endif
 
         

@@ -34,8 +34,7 @@
     <script>
     
         $(document).ready(function(){
-           $(".enviarligacao").click(function(){ // Click to only happen on announce links
-            console.log('oi');
+           $(".enviarligacao").click(function(){ 
             
              $("#aviso_id").val($(this).data('id'));
              $('#ligacao').modal('show');
@@ -55,4 +54,94 @@
           top: 3px;
       }
     </style>
+
+    <style>        
+
+        .display{
+          font-size: 60px;
+          padding: 0 !important;
+        }
+        .display>span{
+          font-weight: bold;
+        }       
+        .well{
+          border-radius: 0 !important;
+          font-size: 13px !important;
+          padding: 0 !important;
+        }
+        .well_laps{
+          padding: 10px !important;
+        }
+
+    </style>
+
+    <script>
+        $(document).ready(function(){ 
+
+            var vueltas = 0;
+            var cron;
+            var sv_min = 0;
+            var sv_hor = 0;
+            var sv_seg = 0;
+            var seg = document.getElementById('seg');
+            var min = document.getElementById('min');
+            var hor = document.getElementById('hor');
+            var iniciado = false; //init status of cron
+
+            $("#btn_play").click(function(){
+                if(!iniciado){ iniciado = true; start_cron(); }
+            });
+
+            function start_cron(){
+              cron = setInterval(function(){
+                sv_seg++;
+                if(sv_seg < 60){
+                  if(sv_seg < 10){ seg.innerHTML = "0"+sv_seg; }else{ seg.innerHTML = sv_seg; }
+                }else{
+                  sv_seg = 0; seg.innerHTML = "00";
+                  sv_min++;
+                  if(sv_min < 60){
+                    if(sv_min < 10){ min.innerHTML = "0"+sv_min; }else{ min.innerHTML = sv_min; }
+                  }else{
+                    sv_min = 0; min.innerHTML = "00";
+                    sv_hor++;
+                    if(sv_hor < 10){ hor.innerHTML = "0"+sv_hor; }else{ hor.innerHTML = sv_hor; }
+                  }
+                }
+              }, 1000);
+            }
+
+            $("#btn_pause").click(function(){
+              clearInterval(cron);
+              iniciado = false;
+            });
+
+            $("#btn_stop").click(function(){
+              sv_min = 0;
+              sv_hor = 0;
+              sv_seg = 0;
+              seg.innerHTML = "00";
+              min.innerHTML = "00";
+              hor.innerHTML = "00";
+              clearInterval(cron);
+              iniciado = false;
+            });
+
+            $("#btn_lap").click(function(){
+              vueltas++;
+              consola('<li class="list-group-item"><small>'+vueltas+'</small>     '+hor.innerHTML+":"+min.innerHTML+":"+seg.innerHTML+'</li><input type="hidden" name="tempoligacao[]" value="'+hor.innerHTML+":"+min.innerHTML+":"+seg.innerHTML+'" />');
+            });
+
+            function consola(msg){
+              $("#log").prepend(msg);
+            }
+
+            $("#btn_clear").click(function(){
+              $("#log").html("");
+              vueltas = 0;
+            });
+
+
+        });
+    </script>
 </head>
