@@ -39,6 +39,6 @@
 
 @include('partials.avisos')
 
-<a class="btn btn-default" href="{{ url('titulos') }}"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Títulos</a>
+<a class="btn btn-default" href="{{ url()->previous() }}"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Títulos</a>
 </div>
 @endsection

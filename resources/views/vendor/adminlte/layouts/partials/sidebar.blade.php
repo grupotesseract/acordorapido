@@ -70,9 +70,9 @@
                 </ul>
             </li>
             @endrole
-            <li>
+            <!-- <li>
                 <a href="{{ url('titulos') }}"><i class='glyphicon glyphicon-list-alt'></i> <span>Títulos</span></a>
-            </li>
+            </li> -->
             @role('admin')
             <li>
                 <a href="{{ url('alunos') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>

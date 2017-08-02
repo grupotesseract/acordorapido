@@ -260,8 +260,10 @@ class TitulosController extends Controller
         $importacao_id = $importacao->id;
         $empresa_id = $request->escola;
 
-        Excel::load($request->file('excel'), function ($reader) use ($estado,$empresa_id,$importacao_id) {
-            $reader->each(function ($sheet) use ($estado,$empresa_id,$importacao_id) {
+        $titulos_importados = array();
+
+        Excel::load($request->file('excel'), function ($reader) use ($estado,$empresa_id,$importacao_id,&$titulos_importados) {
+            $reader->each(function ($sheet) use ($estado,$empresa_id,$importacao_id,&$titulos_importados) {
                 $cliente = Cliente::firstOrNew(['rg' => $sheet->rg]);
                 $cliente->nome = $sheet->nome;
                 $cliente->user_id = Auth::id();
@@ -285,6 +287,7 @@ class TitulosController extends Controller
                 $titulo->titulo = $sheet->titulo;
                 $titulo->estado = $estado;
                 $titulo->save();
+                $titulos_importados[] = $titulo->id;
 
                 //criar registro na tabela pivot
                 $titulo->importacoes()->attach($importacao_id);
@@ -294,25 +297,28 @@ class TitulosController extends Controller
                 $user_id = Auth::id();
                 $escola = Empresa::find($empresa_id)->nome;
                 
-                //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA                
-                $this->avisoRepository->create(
-                    [
-                        'tituloaviso' => $escola,
-                        'texto'      => 'Sua fatura vence em: '.$vencimento.'',
-                        'user_id'    => Auth::id(),
-                        'cliente_id' => $cliente_id,
-                        'status'     => 0,
-                        'estado'     => $estado,
-                        'titulo_id'  => $titulo->id,
-                    ]
+                //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA  
+                           
+                if (count($this->avisoRepository->findWhere(['titulo_id'  => $titulo->id,'estado' => $estado])->toArray()) == 0) {
+                    $this->avisoRepository->create(
+                        [
+                            'tituloaviso' => $escola,
+                            'texto'      => 'Sua fatura vence em: '.$vencimento.'',
+                            'user_id'    => Auth::id(),
+                            'cliente_id' => $cliente_id,
+                            'status'     => 0,
+                            'estado'     => $estado,
+                            'titulo_id'  => $titulo->id,
+                        ]
 
-                );
+                    );
+                }
             });
         });
 
-        //TODO: aqui vai ser o tratamento da importação dos não-pagantes dentro de um mesmo módulo
-        if ($estado == 'verde') {
-            $this->repository->atualizaPagantes($empresa_id);
+        //TODO: CONFIRMAR COM EDILSON
+        if ($estado == 'verde' OR $estado == 'azul') {
+            $this->repository->atualizaPagantes($estado,$empresa_id, $titulos_importados);
         }
 
         \Session::flash('flash_message_success', true);
