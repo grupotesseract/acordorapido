@@ -10,7 +10,10 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\ModeloAvisoCreateRequest;
 use App\Http\Requests\ModeloAvisoUpdateRequest;
 use App\Repositories\ModeloAvisoRepository;
+use App\Repositories\EmpresaRepository;
+
 use App\Validators\ModeloAvisoValidator;
+use Auth;
 
 
 class ModeloAvisosController extends Controller
@@ -26,9 +29,10 @@ class ModeloAvisosController extends Controller
      */
     protected $validator;
 
-    public function __construct(ModeloAvisoRepository $repository, ModeloAvisoValidator $validator)
+    public function __construct(ModeloAvisoRepository $repository, ModeloAvisoValidator $validator, EmpresaRepository $empresaRepository)
     {
         $this->repository = $repository;
+        $this->empresaRepository = $empresaRepository;
         $this->validator  = $validator;
     }
 
@@ -65,6 +69,9 @@ class ModeloAvisosController extends Controller
 
         try {
 
+            
+            $request->request->add(['user_id' => Auth::id()]);
+
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $modeloAviso = $this->repository->create($request->all());
@@ -79,7 +86,7 @@ class ModeloAvisosController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect('/avisomodelos')->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -88,7 +95,7 @@ class ModeloAvisosController extends Controller
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect('/avisomodelos')->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -126,8 +133,19 @@ class ModeloAvisosController extends Controller
     {
 
         $modeloAviso = $this->repository->find($id);
+        $escolas = $this->empresaRepository->all();
 
-        return view('modeloAvisos.edit', compact('modeloAviso'));
+        return view('modeloAvisos.edit', compact('modeloAviso','escolas'));
+    }
+
+    /**
+     * Criar modelo de avisos
+     * @return [type] view de criação
+     */
+    public function create()
+    {        
+        $escolas = $this->empresaRepository->all();
+        return view('modeloAvisos.edit', compact('escolas'));
     }
 
 
@@ -158,7 +176,7 @@ class ModeloAvisosController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect('/avisomodelos')->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {
@@ -169,7 +187,7 @@ class ModeloAvisosController extends Controller
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect('/avisomodelos')->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -184,7 +202,6 @@ class ModeloAvisosController extends Controller
     public function destroy($id)
     {
         $deleted = $this->repository->delete($id);
-
         if (request()->wantsJson()) {
 
             return response()->json([
@@ -193,6 +210,6 @@ class ModeloAvisosController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('message', 'ModeloAviso deleted.');
+        return redirect('/avisomodelos')->with('message', 'ModeloAviso deleted.');
     }
 }

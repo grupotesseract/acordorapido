@@ -14,10 +14,10 @@
 
 
 {!! Form::submit('Enviar SMS Marcados', array('class'=>'btn btn-primary btn-md')) !!}
-<a href="#" class="btn btn-default">Filtro</a></td>
+<!-- <a href="#" class="btn btn-default">Filtro</a></td> -->
 
 <a href="#" name="marcartodos" class="btn btn-default">Marcar Todos</a></td>
-<input type="button" class="btn btn-primary btn-md" name="Check_All" value="Marcar Todos" onClick="CheckAll(document.avisoform.aviso)">
+<!-- <input type="button" class="btn btn-primary btn-md" name="Check_All" value="Marcar Todos" onClick="CheckAll(document.avisoform.aviso)"> -->
 <!-- <a href="#" class="btn btn-default"> <span class="glyphicon glyphicon-earphone" alt="Efetuar Ligação Telefônica" aria-hidden="true"></span></a> -->
 
 <table class="table table-striped table-hovered">
