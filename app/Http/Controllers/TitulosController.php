@@ -255,11 +255,12 @@ class TitulosController extends Controller
     public function titulos($id_importacao)
     {
         //$titulos = Titulo::where('importacao_id', $id_importacao)->get();
-        $importacao = Importacao::find($id_importacao)->first();
-        $titulos = $importacao->titulos->all();
-        $escola = $importacao->empresa;
 
-        return view('importacoes.titulos')->with(['escola'=> $escola, 'titulos'=> $titulos, 'importacao'=> $importacao]);
+        $importacao = Importacao::find($id_importacao);
+
+        $titulos = $importacao->titulos->all();
+
+        return view('importacoes.titulos')->with(['titulos'=> $titulos, 'importacao'=> $importacao]);
     }
 
     public function importa(TituloCreateRequest $request, string $estado)
