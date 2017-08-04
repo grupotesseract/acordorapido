@@ -5,6 +5,7 @@
 @section('contentheader_title', $escola->nome.': '.count($titulos).' títulos importados em '.$importacao->created_at->format('d/m/Y H:i') )
 
 @section('main-content')
+@import('partials.titulos', ['titulos' => $titulos])
 <table class="table table-striped table-hovered">
   <thead>
     <tr>
@@ -37,8 +38,6 @@
             @empty
             @endforelse
           @endif
-
-        
         @endforeach
 
 
