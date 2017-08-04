@@ -6,7 +6,7 @@
 
 
 @section('main-content')
-    <div class="container-fluid spark-screen">
+    <div class="container-fluid spark-screen" style="background-image:url('{{URL::asset('/img/logoacordorapido.png')}}');background-position:center;background-repeat:no-repeat;filter:grayscale(100%) opacity(50%)">
 
         <!-- Main content -->
         <section class="content">

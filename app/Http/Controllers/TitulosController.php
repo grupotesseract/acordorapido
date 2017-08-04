@@ -201,7 +201,7 @@ class TitulosController extends Controller
     {
         $escolas = Empresa::all();
 
-        return view('importacao')->with(['estado'=> $estado, 'escolas' => $escolas]);
+        return view('importacoes.importar')->with(['estado'=> $estado, 'escolas' => $escolas]);
     }
 
     public function showModulo($estado)
@@ -267,6 +267,7 @@ class TitulosController extends Controller
         $importacao = Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado, 'empresa_id' => $request->escola]);
         $importacao_id = $importacao->id;
         $empresa_id = $request->escola;
+        $titulos = []; // Array para preencher com os títulos importados
 
         //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA
         $retorno = $this->modeloAvisoRepository->parametrizaAviso($estado,$empresa_id);
@@ -342,6 +343,8 @@ class TitulosController extends Controller
         \Session::flash('flash_message_success', true);
         \Session::flash('flash_message', 'Títulos importados com sucesso!');
 
-        return Redirect::to('/importacao/'.$estado);
+        $titulos = Titulo::whereIn($titulos_importados);
+        $escolas = Empresa::all();
+        return view('importacoes.importar')->with(['estado'=> $estado, 'escolas' => $escolas, 'titulos' => $titulos]);
     }
 }

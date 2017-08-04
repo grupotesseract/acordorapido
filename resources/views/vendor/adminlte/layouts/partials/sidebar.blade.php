@@ -30,6 +30,9 @@
                 <a href="#"><i class='glyphicon glyphicon-th-list'></i> <span>Cadastros</span><i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{ url('escolas') }}"><i class='glyphicon glyphicon-education'></i>Escolas</a></li>
+                    <li>
+                        <a href="{{ url('alunos') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>
+                    </li>
                     <li class="treeview">
                         <a href="{{ url('avisospendentes') }}"><i class='glyphicon glyphicon-user'></i><span>Usuários</span><i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
@@ -74,11 +77,6 @@
             <!-- <li>
                 <a href="{{ url('titulos') }}"><i class='glyphicon glyphicon-list-alt'></i> <span>Títulos</span></a>
             </li> -->
-            @role('admin')
-            <li>
-                <a href="{{ url('alunos') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>
-            </li>
-            @endrole
             @role('escola')
             <li>
                 <a href="{{ url('alunos/2') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>
