@@ -335,7 +335,7 @@ class TitulosController extends Controller
         \Session::flash('flash_message_success', true);
         \Session::flash('flash_message', 'Títulos importados com sucesso!');
 
-        $titulos = Titulo::whereIn($titulos_importados);
+        $titulos = Titulo::whereIn('id',$titulos_importados)->with('avisos')->get();
         $escolas = Empresa::all();
         return view('importacoes.importar')->with(['estado'=> $estado, 'escolas' => $escolas, 'titulos' => $titulos]);
     }

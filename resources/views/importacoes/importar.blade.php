@@ -60,13 +60,23 @@
             </div>
             {!! Form::close() !!}
         </div>
+        @if(isset($titulos))
         <div class="col-sm-8">
-            @if(isset($titulos))
-            @foreach($titulos as $titulo)
-                {{ $titulo->created_at }}
-            @endforeach
-            @endif
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Títulos Importados</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    @include('partials.titulos', [ 'titulos' => $titulos ])
+                </div>
+            </div>
         </div>
+        @endif
     </div>
 @endsection
 
