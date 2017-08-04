@@ -282,8 +282,8 @@ class TitulosController extends Controller
 
         $titulos_importados = array();
 
-        Excel::load($request->file('excel'), function ($reader) use ($estado,$empresa_id,$importacao_id,&$titulos_importados) {
-            $reader->each(function ($sheet) use ($estado,$empresa_id,$importacao_id,&$titulos_importados) {
+        Excel::load($request->file('excel'), function ($reader) use ($estado,$empresa_id,$importacao_id,&$titulos_importados,$retorno) {
+            $reader->each(function ($sheet) use ($estado,$empresa_id,$importacao_id,&$titulos_importados,$retorno) {
                 $cliente = Cliente::firstOrNew(['rg' => $sheet->rg]);
                 $cliente->nome = $sheet->nome;
                 $cliente->user_id = Auth::id();
@@ -322,7 +322,7 @@ class TitulosController extends Controller
                     $this->avisoRepository->create(
                         [
                             'tituloaviso' => $retorno['titulo'],
-                            'texto'      => $retorno['mensagem'],
+                            'texto'      => str_replace('[vencimento]', $vencimento, $retorno['mensagem']),
                             'user_id'    => Auth::id(),
                             'cliente_id' => $cliente_id,
                             'status'     => 0,

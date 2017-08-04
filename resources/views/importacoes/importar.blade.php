@@ -29,6 +29,13 @@
           <em>{!! session('flash_message') !!}</em>
         </div>
     @endif
+    @if(Session::has('flash_message_error'))
+        <div class="alert alert-warning alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h4><i class="icon fa fa-check"></i> Erro!</h4>
+          <em>{!! session('flash_message') !!}</em>
+        </div>
+    @endif
         <p class="errors">
           {!!$errors->first('excel')!!}
         </p>
