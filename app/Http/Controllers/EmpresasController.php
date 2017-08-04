@@ -70,7 +70,7 @@ class EmpresasController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect('escolas/')->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -79,7 +79,7 @@ class EmpresasController extends Controller
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect('escolas/')->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -122,6 +122,12 @@ class EmpresasController extends Controller
         return view('escolas.edit', compact('escola'));
     }
 
+    public function create()
+    {       
+        return view('escolas.edit', compact('escola'));
+    }
+
+    
     /**
      * Update the specified resource in storage.
      *
@@ -146,7 +152,7 @@ class EmpresasController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect('escolas/')->with('message', $response['message']);
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -155,7 +161,7 @@ class EmpresasController extends Controller
                 ]);
             }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            return redirect('escolas/')->withErrors($e->getMessageBag())->withInput();
         }
     }
 
@@ -177,6 +183,6 @@ class EmpresasController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('message', 'Empresa deleted.');
+        return redirect('escolas/')->with('message', 'Empresa deleted.');
     }
 }

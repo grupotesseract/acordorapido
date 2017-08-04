@@ -22,9 +22,7 @@ class AvisoEnviadoRepositoryEloquent extends BaseRepository implements AvisoEnvi
     public function model()
     {
         return AvisoEnviado::class;
-    }
-
-    
+    }    
 
     /**
      * Boot up the repository, pushing criteria
@@ -33,4 +31,6 @@ class AvisoEnviadoRepositoryEloquent extends BaseRepository implements AvisoEnvi
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    
 }

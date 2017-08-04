@@ -74,6 +74,9 @@
                 </ul>
             </li>
             @endrole
+            <!-- <li>
+                <a href="{{ url('titulos') }}"><i class='glyphicon glyphicon-list-alt'></i> <span>Títulos</span></a>
+            </li> -->
             @role('escola')
             <li>
                 <a href="{{ url('alunos/2') }}"><i class='glyphicon glyphicon-user'></i> <span>Alunos</span></a>

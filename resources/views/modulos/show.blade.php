@@ -41,20 +41,9 @@
       <td> {{ $titulo->valor }}</td>
       <td> {{ $titulo->created_at->format('d/m/Y H:i') }}</td>
       <td>  
-
-        @foreach ($titulo->avisos as $aviso)
-          @if (isset($aviso))
-            @forelse  ($aviso->avisosenviados->where('tipodeaviso', 0) as $avisoenviado)            
-              <span class="label label-{{ $aviso->estado }}"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
-            @empty
-            @endforelse
-          @endif
-
-        
-        @endforeach
-
-
+      @include ('avisos.partials.avisosicones')
       </td>
+
       <td>
       <!-- <a href="/avisos/create" class="btn btn-sm btn-default"> <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Enviar SMS</a> -->
       <a class="btn btn-sm btn-default" href="{{ url('titulos/'.$titulo->id) }}"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> mais detalhes </a>

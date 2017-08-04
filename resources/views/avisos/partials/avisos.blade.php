@@ -1,25 +1,3 @@
-
-
-@extends('adminlte::layouts.app')
-
-@section('htmlheader_title', 'Avisos')
-
-@section('contentheader_title', 'Avisos')
-
-@section('main-content')
-
-
-
-{!! Form::open(array('url'=>'envialote/','method'=>'POST','name'=>'avisoform')) !!}
-
-
-{!! Form::submit('Enviar SMS Marcados', array('class'=>'btn btn-primary btn-md')) !!}
-<!-- <a href="#" class="btn btn-default">Filtro</a></td> -->
-
-<a href="#" name="marcartodos" class="btn btn-default">Marcar Todos</a></td>
-<!-- <input type="button" class="btn btn-primary btn-md" name="Check_All" value="Marcar Todos" onClick="CheckAll(document.avisoform.aviso)"> -->
-<!-- <a href="#" class="btn btn-default"> <span class="glyphicon glyphicon-earphone" alt="Efetuar Ligação Telefônica" aria-hidden="true"></span></a> -->
-
 <table class="table table-striped table-hovered">
 	<thead>
 		<tr>
@@ -41,7 +19,7 @@
 			<td>{{ $aviso->texto }}</td>
 			<td>{{ isset($aviso->cliente->nome)? $aviso->cliente->nome : 'Cliente não cadastrado' }}</td>
 			<td>{{ !$aviso->status? 'Não Enviado' : 'Enviado '.$aviso->status.' avisos' }}</td>
-			<td><a href="avisos/sms/{{$aviso->id}}" class="btn btn-default"> <span class="glyphicon glyphicon-comment" alt="Enviar SMS" aria-hidden="true"></span></a></td>
+			<td><a href="{{ url('avisos/sms/'.$aviso->id) }}" class="btn btn-default"> <span class="glyphicon glyphicon-comment" alt="Enviar SMS" aria-hidden="true"></span></a></td>
 			<td>
 				<button type="button" data-id="{{$aviso->id}}" class="enviarligacao btn btn-default" data-toggle="modal"><span class="glyphicon glyphicon-earphone" alt="Efetuar Ligação Telefônica" aria-hidden="true"></span></button>
 			</td>
@@ -94,6 +72,3 @@
 
   </div>
 </div>
-
-@endsection
-

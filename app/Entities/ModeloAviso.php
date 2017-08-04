@@ -10,7 +10,7 @@ class ModeloAviso extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [];
+    protected $fillable = ['user_id','empresa_id','titulo','mensagem','tipo'];
 
     protected $table = 'modeloavisos';
 

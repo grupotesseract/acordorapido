@@ -45,11 +45,25 @@ class TituloRepositoryEloquent extends BaseRepository implements TituloRepositor
      *
      * @param number $empresa ID da Empresa
      */
-    public function atualizaPagantes($empresa_id)
+    public function atualizaPagantes($estado,$empresa_id, $titulosimportados)
+
+
     {
+        if ($estado == 'azul' OR $estado == 'verde') {
+            $estado_pagantes = 'azul';    
+        }
+        elseif ($estado == 'amarelo') {
+            $estado_pagantes = 'verde';
+        }
+        elseif ($estado == 'vermelho') {
+            $estado_pagantes = 'amarelo';
+        }
+
+        
         Titulo::where('empresa_id', $empresa_id)
-              ->where('estado', 'azul')
+              ->where('estado', $estado_pagantes)
               ->where('pago', false)
+              ->whereNotIn('id', $titulosimportados)
               ->update(['pago' => true]);
     }
 }

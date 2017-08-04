@@ -10,6 +10,8 @@ use App\Http\Requests\TituloUpdateRequest;
 use App\Importacao as Importacao;
 use App\Repositories\AvisoRepository;
 use App\Repositories\TituloRepository;
+
+use App\Repositories\ModeloAvisoRepository;
 use App\Titulo as Titulo;
 use App\Validators\TituloValidator;
 use Auth;
@@ -31,12 +33,12 @@ class TitulosController extends Controller
      */
     protected $validator;
 
-    public function __construct(TituloRepository $repository, TituloValidator $validator, AvisoRepository $avisoRepository)
+    public function __construct(TituloRepository $repository, TituloValidator $validator, AvisoRepository $avisoRepository, ModeloAvisoRepository $modeloAvisoRepository)
     {
         $this->repository = $repository;
         $this->validator = $validator;
         $this->avisoRepository = $avisoRepository;
-        //$this->importacaoRepository = $importacaoRepository;
+        $this->modeloAvisoRepository = $modeloAvisoRepository;
 
         $this->middleware('auth');
     }
@@ -61,6 +63,8 @@ class TitulosController extends Controller
             $query->where('status','>=',1);
         }])->get();
 
+        dd($titulos);
+        
         return view('titulos.index', compact('titulos'));
     }
 
@@ -203,7 +207,11 @@ class TitulosController extends Controller
     public function showModulo($estado)
     {
         $u = Auth::user();
-        $titulos = Titulo::porEstado($estado)->get();
+        $titulos = Titulo::porEstado($estado)
+        ->with(['avisos' => function ($query) {
+            $query->where('status','>=',1);
+        }])
+        ->get();
 
         if ($u->hasRole('aluno')) {
             $cliente = $u->cliente;
@@ -216,7 +224,7 @@ class TitulosController extends Controller
         if ($u->hasRole('escola')) {
             $empresa = $u->empresa;
             if (!$empresa) {
-                dd('empresa não encontrado');
+                dd('empresa não encontrada');
             }
             $avisos = Aviso::where('cliente_id', $empresa->id);
         }
@@ -261,8 +269,10 @@ class TitulosController extends Controller
         $empresa_id = $request->escola;
         $titulos = []; // Array para preencher com os títulos importados
 
-        Excel::load($request->file('excel'), function ($reader) use ($estado,$empresa_id,$importacao_id) {
-            $reader->each(function ($sheet) use ($estado,$empresa_id,$importacao_id) {
+        $titulos_importados = array();
+
+        Excel::load($request->file('excel'), function ($reader) use ($estado,$empresa_id,$importacao_id,&$titulos_importados) {
+            $reader->each(function ($sheet) use ($estado,$empresa_id,$importacao_id,&$titulos_importados) {
                 $cliente = Cliente::firstOrNew(['rg' => $sheet->rg]);
                 $cliente->nome = $sheet->nome;
                 $cliente->user_id = Auth::id();
@@ -286,6 +296,7 @@ class TitulosController extends Controller
                 $titulo->titulo = $sheet->titulo;
                 $titulo->estado = $estado;
                 $titulo->save();
+                $titulos_importados[] = $titulo->id;
 
                 //criar registro na tabela pivot
                 $titulo->importacoes()->attach($importacao_id);
@@ -295,32 +306,37 @@ class TitulosController extends Controller
                 $user_id = Auth::id();
                 $escola = Empresa::find($empresa_id)->nome;
                 
-                //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA                
-                $this->avisoRepository->create(
-                    [
-                        'tituloaviso' => $escola,
-                        'texto'      => 'Sua fatura vence em: '.$vencimento.'',
-                        'user_id'    => Auth::id(),
-                        'cliente_id' => $cliente_id,
-                        'status'     => 0,
-                        'estado'     => $estado,
-                        'titulo_id'  => $titulo->id,
-                    ]
+                //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA
+                $retorno = $this->modeloAvisoRepository->parametrizaAviso($estado,$empresa_id,$vencimento);
 
-                );
+
+                if (count($this->avisoRepository->findWhere(['titulo_id'  => $titulo->id,'estado' => $estado])->toArray()) == 0) {                    
+                    $this->avisoRepository->create(
+                        [
+                            'tituloaviso' => $retorno['titulo'],
+                            'texto'      => $retorno['mensagem'],
+                            'user_id'    => Auth::id(),
+                            'cliente_id' => $cliente_id,
+                            'status'     => 0,
+                            'estado'     => $estado,
+                            'titulo_id'  => $titulo->id,
+                        ]
+
+                    );
+                }
             });
         });
 
-        //TODO: aqui vai ser o tratamento da importação dos não-pagantes dentro de um mesmo módulo
-        if ($estado == 'verde') {
-            $this->repository->atualizaPagantes($empresa_id);
+        //TODO: CONFIRMAR COM EDILSON
+        if ($estado == 'verde' OR $estado == 'azul') {
+            $this->repository->atualizaPagantes($estado,$empresa_id, $titulos_importados);
         }
 
         \Session::flash('flash_message_success', true);
         \Session::flash('flash_message', 'Títulos importados com sucesso!');
 
+        $titulos = Titulo::whereIn($titulos_importados);
         $escolas = Empresa::all();
         return view('importacoes.importar')->with(['estado'=> $estado, 'escolas' => $escolas, 'titulos' => $titulos]);
-        return Redirect::to('/importacao/'.$estado)->with('titulos',$titulos);
     }
 }
