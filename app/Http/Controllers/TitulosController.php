@@ -197,7 +197,7 @@ class TitulosController extends Controller
     {
         $escolas = Empresa::all();
 
-        return view('importacao')->with(['estado'=> $estado, 'escolas' => $escolas]);
+        return view('importacoes.importar')->with(['estado'=> $estado, 'escolas' => $escolas]);
     }
 
     public function showModulo($estado)
@@ -259,6 +259,7 @@ class TitulosController extends Controller
         $importacao = Importacao::create(['user_id' => Auth::id(), 'modulo' => $estado, 'empresa_id' => $request->escola]);
         $importacao_id = $importacao->id;
         $empresa_id = $request->escola;
+        $titulos = []; // Array para preencher com os títulos importados
 
         Excel::load($request->file('excel'), function ($reader) use ($estado,$empresa_id,$importacao_id) {
             $reader->each(function ($sheet) use ($estado,$empresa_id,$importacao_id) {
@@ -318,6 +319,8 @@ class TitulosController extends Controller
         \Session::flash('flash_message_success', true);
         \Session::flash('flash_message', 'Títulos importados com sucesso!');
 
-        return Redirect::to('/importacao/'.$estado);
+        $escolas = Empresa::all();
+        return view('importacoes.importar')->with(['estado'=> $estado, 'escolas' => $escolas, 'titulos' => $titulos]);
+        return Redirect::to('/importacao/'.$estado)->with('titulos',$titulos);
     }
 }
