@@ -10,6 +10,8 @@ use App\Http\Requests\TituloUpdateRequest;
 use App\Importacao as Importacao;
 use App\Repositories\AvisoRepository;
 use App\Repositories\TituloRepository;
+
+use App\Repositories\ModeloAvisoRepository;
 use App\Titulo as Titulo;
 use App\Validators\TituloValidator;
 use Auth;
@@ -31,12 +33,12 @@ class TitulosController extends Controller
      */
     protected $validator;
 
-    public function __construct(TituloRepository $repository, TituloValidator $validator, AvisoRepository $avisoRepository)
+    public function __construct(TituloRepository $repository, TituloValidator $validator, AvisoRepository $avisoRepository, ModeloAvisoRepository $modeloAvisoRepository)
     {
         $this->repository = $repository;
         $this->validator = $validator;
         $this->avisoRepository = $avisoRepository;
-        //$this->importacaoRepository = $importacaoRepository;
+        $this->modeloAvisoRepository = $modeloAvisoRepository;
 
         $this->middleware('auth');
     }
@@ -61,6 +63,8 @@ class TitulosController extends Controller
             $query->where('status','>=',1);
         }])->get();
 
+        dd($titulos);
+        
         return view('titulos.index', compact('titulos'));
     }
 
@@ -203,7 +207,11 @@ class TitulosController extends Controller
     public function showModulo($estado)
     {
         $u = Auth::user();
-        $titulos = Titulo::porEstado($estado)->get();
+        $titulos = Titulo::porEstado($estado)
+        ->with(['avisos' => function ($query) {
+            $query->where('status','>=',1);
+        }])
+        ->get();
 
         if ($u->hasRole('aluno')) {
             $cliente = $u->cliente;
@@ -216,7 +224,7 @@ class TitulosController extends Controller
         if ($u->hasRole('escola')) {
             $empresa = $u->empresa;
             if (!$empresa) {
-                dd('empresa não encontrado');
+                dd('empresa não encontrada');
             }
             $avisos = Aviso::where('cliente_id', $empresa->id);
         }
@@ -297,13 +305,15 @@ class TitulosController extends Controller
                 $user_id = Auth::id();
                 $escola = Empresa::find($empresa_id)->nome;
                 
-                //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA  
-                           
-                if (count($this->avisoRepository->findWhere(['titulo_id'  => $titulo->id,'estado' => $estado])->toArray()) == 0) {
+                //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA
+                $retorno = $this->modeloAvisoRepository->parametrizaAviso($estado,$empresa_id,$vencimento);
+
+
+                if (count($this->avisoRepository->findWhere(['titulo_id'  => $titulo->id,'estado' => $estado])->toArray()) == 0) {                    
                     $this->avisoRepository->create(
                         [
-                            'tituloaviso' => $escola,
-                            'texto'      => 'Sua fatura vence em: '.$vencimento.'',
+                            'tituloaviso' => $retorno['titulo'],
+                            'texto'      => $retorno['mensagem'],
                             'user_id'    => Auth::id(),
                             'cliente_id' => $cliente_id,
                             'status'     => 0,
