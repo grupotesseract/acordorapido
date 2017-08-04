@@ -268,6 +268,17 @@ class TitulosController extends Controller
         $importacao_id = $importacao->id;
         $empresa_id = $request->escola;
 
+        //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA
+        $retorno = $this->modeloAvisoRepository->parametrizaAviso($estado,$empresa_id);
+
+        if (!$retorno) {
+            \Session::flash('flash_message_error', true);
+            \Session::flash('flash_message', 'Antes de efetuar uma importação, você deve cadastrar os avisos que serão enviados para essa escola! Vá em Avisos->Modelo de Avisos');
+
+            return Redirect::to('/importacao/'.$estado);
+            exit;
+        }
+
         $titulos_importados = array();
 
         Excel::load($request->file('excel'), function ($reader) use ($estado,$empresa_id,$importacao_id,&$titulos_importados) {
@@ -305,10 +316,7 @@ class TitulosController extends Controller
                 $user_id = Auth::id();
                 $escola = Empresa::find($empresa_id)->nome;
                 
-                //TODO - AQUI DEVE SER PARAMETRIZADO A MENSAGEM POR ESTADO E ESCOLA
-                $retorno = $this->modeloAvisoRepository->parametrizaAviso($estado,$empresa_id,$vencimento);
-
-
+                
                 if (count($this->avisoRepository->findWhere(['titulo_id'  => $titulo->id,'estado' => $estado])->toArray()) == 0) {                    
                     $this->avisoRepository->create(
                         [

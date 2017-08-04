@@ -44,13 +44,22 @@ class ModeloAvisoRepositoryEloquent extends BaseRepository implements ModeloAvis
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function parametrizaAviso ($estado, $empresa, $vencimento) {
+    public function parametrizaAviso ($estado, $empresa, $vencimento = null) {
                 
         $modeloaviso = ModeloAviso::where('tipo',ucfirst($estado))->where('empresa_id',$empresa)->get()->first();
 
+        if (!$modeloaviso) {
+            return false;
+        }
+
         $modelo_aviso_final['mensagem'] = str_replace('[escola]', $modeloaviso->empresa->nome, $modeloaviso['mensagem']);
-        $modelo_aviso_final['mensagem'] = str_replace('[vencimento]', $vencimento, $modelo_aviso_final['mensagem']);
+        
+        if ($vencimento) {
+            $modelo_aviso_final['mensagem'] = str_replace('[vencimento]', $vencimento, $modelo_aviso_final['mensagem']);
+        }
+        
         $modelo_aviso_final['titulo'] = $modeloaviso['titulo'];
+
 
         return $modelo_aviso_final;
 

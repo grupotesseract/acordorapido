@@ -52,7 +52,7 @@
         
         <div class="row">
           <div class="col-xs-12 col-lg-12">
-            {!! Form::submit('Enviar', array('class'=>'btn btn-primary btn-md')) !!}
+            {!! Form::submit('Salvar', array('class'=>'btn btn-primary btn-md')) !!}
           </div>          
         </div>  
         {!! Form::close() !!}
