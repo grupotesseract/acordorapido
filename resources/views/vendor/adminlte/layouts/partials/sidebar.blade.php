@@ -25,6 +25,7 @@
             <li class="active"><a href="{{ url('home') }}"><i class='glyphicon glyphicon-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             
             @role('admin')
+            <li class="active"><a href="{{ url('dashboard') }}"><i class='glyphicon glyphicon-dashboard'></i> <span>Dashboard</span></a></li>
             <li class="treeview">
                 <a href="#"><i class='glyphicon glyphicon-th-list'></i> <span>Cadastros</span><i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
