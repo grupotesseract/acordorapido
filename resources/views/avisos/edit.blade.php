@@ -40,7 +40,7 @@
 
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-pencil"></i></span>
-                <input name="titulo" id="titulo" type="text" class="form-control" placeholder="Título" aria-describedby="basic-addon1">
+                <input name="tituloaviso" id="titulo" type="text" class="form-control" placeholder="Título" aria-describedby="basic-addon1">
               </div>
 
               <div class="input-group">
